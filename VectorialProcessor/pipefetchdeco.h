@@ -12,6 +12,17 @@ private:
 public:
     PipeFetchDeco();
     void writeReg(bool*);
+
+    void getOpcode(bool*);
+    void getData(bool*);
+    void getF(bool*);
+    void getCond(bool*);
+    void getra(bool*);
+    void getrb(bool*);
+    void getRa(bool*);
+    void getRb(bool*);
+    void getRc(bool*);
+    void getImm(bool*);
 };
 
 #endif // PIPEFETCHDECO_H

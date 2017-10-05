@@ -5,14 +5,15 @@
 #include <QApplication>
 #include <stdio.h>
 
-int main(int argc, char *argv[])
+//int main(int argc, char *argv[])
+int main()
 {
 
     InstructionMem* memory = new InstructionMem();
 
 
-    memory->getVector(2);
-    printf("vector %c \n", memory->getVector(0) );
+
+    printf("vector %c \n", memory->getInstruction(0) );
 
     //--------------prueba mux 32----------------------------
     unsigned char* c1 = new unsigned char[4]();
@@ -31,7 +32,12 @@ int main(int argc, char *argv[])
     //MainWindow w;
     //w.show();
 
-
+    unsigned char* ra = new unsigned char[4]();
+    unsigned char* rb = new unsigned char[4]();
+    *(int*)ra = 35;
+    *(int*)rb = 1;
+    int res = *(int*)ra >> *(int*)rb;
+    printf("muxed %d\n",res );
 
 
     //return a.exec();
