@@ -14,9 +14,15 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    instructionmem.cpp
+    instructionmem.cpp \
+    mux32.cpp \
+    mux64.cpp \
+    pipefetchdeco.cpp
 
 HEADERS  += mainwindow.h \
-    instructionmem.h
+    instructionmem.h \
+    mux32.h \
+    mux64.h \
+    pipefetchdeco.h
 
 FORMS    += mainwindow.ui

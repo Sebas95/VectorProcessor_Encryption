@@ -2,14 +2,14 @@
 #define INSTRUCTIONMEM_H
 
 #include <stddef.h>
-
+#define MEGA 1024*1024
 
 class InstructionMem
 {
 private:
     unsigned char *mem = NULL;
 public:
-    char getVector(int dir);
+    unsigned char getVector(int dir);
     InstructionMem();
 
 

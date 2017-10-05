@@ -2,14 +2,14 @@
 
 InstructionMem::InstructionMem()
 {
-    mem = new unsigned char[1024]();
+    mem = new unsigned char[6*MEGA]();
     mem[0]='f';
     mem[1]='c';
     mem[2]='3';
     //delete[] tempBuffer;
 }
 
-char InstructionMem:: getVector(int dir)
+unsigned char InstructionMem:: getVector(int dir)
 {
     char vector[8];
     vector[0] = mem[dir+0];
