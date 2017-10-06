@@ -5,10 +5,9 @@ ControlUnit::ControlUnit()
 
 }
 
-void ControlUnit::obtainControl(bool opcode[],bool data[],bool F,bool cond[])
+void ControlUnit::obtainControl(bool opcode[],bool data[],bool F)
 {
-    this->cond[0] = cond[0];
-    this->cond[1] = cond[1];
+
 
     WE[0] = false;
     WE[1] = false;

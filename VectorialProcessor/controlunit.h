@@ -8,7 +8,7 @@ private:
 
 public:
     ControlUnit();
-    void obtainControl(bool opcode[],bool data[],bool F,bool cond[]);
+    void obtainControl(bool opcode[],bool data[],bool F);
     bool WE[2];
     bool WE_v;
     bool WE_s;
@@ -18,7 +18,7 @@ public:
     bool instr_enable;
     bool sel_opb;
     bool sel_opA[2];
-    bool cond[2];
+
     int getIntOpcode(bool opcode[]);
 };
 

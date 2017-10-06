@@ -17,6 +17,7 @@ public:
     bool instr_enable;
     bool sel_opb;
     bool sel_opA[2];
+    bool cond[2];
 
     unsigned char* ra[4];
     unsigned char* rb[4];

@@ -11,7 +11,7 @@ void PipeFetchDeco::writeReg(bool* reg)
     for (int i = 0 ;  i< 32 ; i++)
     {
         this->reg[i]=reg[i];
-        std::cout<<reg[i]<<"\n";
+       // std::cout<<reg[i]<<"\n";
     }
 
 }

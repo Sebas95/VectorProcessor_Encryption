@@ -26,7 +26,10 @@ SOURCES += main.cpp\
     alu32b.cpp \
     alu64.cpp \
     pipeexewb.cpp \
-    controlunit.cpp
+    controlunit.cpp \
+    processor.cpp \
+    int_bin_converter.cpp \
+    conditionunit.cpp
 
 HEADERS  += mainwindow.h \
     instructionmem.h \
@@ -42,6 +45,9 @@ HEADERS  += mainwindow.h \
     alu32b.h \
     alu64.h \
     pipeexewb.h \
-    controlunit.h
+    controlunit.h \
+    processor.h \
+    int_bin_converter.h \
+    conditionunit.h
 
 FORMS    += mainwindow.ui
