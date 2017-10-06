@@ -6,10 +6,9 @@ ALU32b::ALU32b()
 }
 
 
- unsigned char* ALU32b::operate(int ctrl_s, unsigned char* opa,  unsigned char* opb ,bool* z, bool* c)
+void ALU32b::operate(int ctrl_s, unsigned char* opa,  unsigned char* opb ,bool* z, bool* c,unsigned char* result)
  {
      int res=0;
-     unsigned char* out = (unsigned char*)malloc(4*sizeof(unsigned char));
      if(ctrl_s ==0  )
             res = *(int*)opa + *(int*)opb;
      if(ctrl_s ==1  )
@@ -32,6 +31,6 @@ ALU32b::ALU32b()
      else
          *c = false;
 
-     *out = *(unsigned char*)res;
-     return out;
+     *result = *(unsigned char*)res;
+
  }

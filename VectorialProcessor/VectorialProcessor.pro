@@ -25,7 +25,9 @@ SOURCES += main.cpp\
     pipedecoexe.cpp \
     alu8b.cpp \
     alu32b.cpp \
-    alu64.cpp
+    alu64.cpp \
+    pipeexewb.cpp \
+    controlunit.cpp
 
 HEADERS  += mainwindow.h \
     instructionmem.h \
@@ -39,6 +41,8 @@ HEADERS  += mainwindow.h \
     pipedecoexe.h \
     alu8b.h \
     alu32b.h \
-    alu64.h
+    alu64.h \
+    pipeexewb.h \
+    controlunit.h
 
 FORMS    += mainwindow.ui

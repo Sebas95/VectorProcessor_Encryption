@@ -9,12 +9,12 @@ InstructionMem::InstructionMem()
     //delete[] tempBuffer;
 }
 
-unsigned char InstructionMem:: getInstruction(int dir)
+void InstructionMem:: getInstruction(int dir, unsigned char *instruction)
 {
-    char vector[4];
-    vector[0] = mem[dir+0];
-    vector[1] = mem[dir+1];
-    vector[2] = mem[dir+2];
-    vector[3] = mem[dir+3];
-    return *vector;
+
+    instruction[0] = mem[dir+0];
+    instruction[1] = mem[dir+1];
+    instruction[2] = mem[dir+2];
+    instruction[3] = mem[dir+3];
+
 }

@@ -18,6 +18,7 @@ private:
     ALU8b* alu7;
 public:
     ALU64();
+    void operate(int ctrl_v, unsigned char* opa,  unsigned char* opb ,unsigned char* result);
 };
 
 #endif // ALU64_H

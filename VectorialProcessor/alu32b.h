@@ -7,7 +7,7 @@ class ALU32b
 {
 public:
     ALU32b();
-    unsigned char* operate(int ctrl_s, unsigned char* opa,  unsigned char* opb ,bool* z, bool* c);
+    void operate(int ctrl_s, unsigned char* opa,  unsigned char* opb ,bool* z, bool* c,unsigned char* result);
 };
 
 #endif // ALU32B_H

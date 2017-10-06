@@ -10,7 +10,7 @@ private:
 public:
 
     InstructionMem();
-    unsigned char getInstruction(int dir);
+    void getInstruction(int dir, unsigned char *instruction);
 
 
 };
