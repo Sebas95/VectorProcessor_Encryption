@@ -1,10 +1,9 @@
 #include "datamem.h"
-#include "instructionmem.h"
+
 
 DataMem::DataMem()
 {
-    mem = new unsigned char[64*MEGA]();
-
+    init_mem("/home/sebastian95/QtWorkspace/VectorialProcessor/original.data");
 }
 
 void DataMem:: getVector(int dir, unsigned char* vector)
@@ -52,4 +51,56 @@ void DataMem:: write(bool WE[], unsigned char* direction, unsigned char* Din32, 
        mem[dir+7] = Din64[7];
    }
 
+}
+void DataMem::init_mem(const char *filename)
+{
+
+    int string_size, read_size;
+    FILE *handler = fopen(filename, "r");
+    if (handler)
+    {
+        // Seek the last byte of the file
+        fseek(handler, 0, SEEK_END);
+        // Offset from the first to the last byte, or in other words, filesize
+        string_size = ftell(handler);
+        size = string_size;
+        // go back to the start of the file
+        rewind(handler);
+
+        // Allocate a string that can hold it all
+        mem = (unsigned char*) malloc(sizeof(unsigned char) * (string_size + 1) );
+
+        // Read it all in one operation
+        read_size = fread(mem, sizeof(unsigned char), string_size, handler);
+
+        // fread doesn't set it so put a \0 in the last position
+        // and buffer is now officially a string
+        mem[string_size] = '\0';
+        printf("The size of the image is %d \n",string_size);
+        if (string_size != read_size)
+        {
+            //printf("%s \n","Error");
+            // Something went wrong, throw away the memory and set
+            // the buffer to NULL
+            free(mem);
+            mem = NULL;
+        }
+
+
+
+
+        // Always remember to close the file.
+        fclose(handler);
+     }
+
+
+
+}
+
+void DataMem::write_image(){
+    FILE * pFile;
+
+    pFile = fopen ("/home/sebastian95/QtWorkspace/VectorialProcessor/myfile.data", "wb");
+    fwrite (mem , sizeof(char), size, pFile);
+    fclose (pFile);
 }
