@@ -98,7 +98,5 @@ void PipeFetchDeco::getImm(bool* bus)
     bus[14] = reg[14];
     bus[15] = reg[15];
     bus[16] = reg[16];
-    bus[17] = reg[17];
-    bus[18] = reg[18];
-    bus[19] = reg[19];
+
 }

@@ -29,7 +29,8 @@ SOURCES += main.cpp\
     controlunit.cpp \
     processor.cpp \
     int_bin_converter.cpp \
-    conditionunit.cpp
+    conditionunit.cpp \
+    parser.cpp
 
 HEADERS  += mainwindow.h \
     instructionmem.h \
@@ -48,6 +49,7 @@ HEADERS  += mainwindow.h \
     controlunit.h \
     processor.h \
     int_bin_converter.h \
-    conditionunit.h
+    conditionunit.h \
+    parser.h
 
 FORMS    += mainwindow.ui

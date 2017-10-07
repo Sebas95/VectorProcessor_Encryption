@@ -3,7 +3,7 @@
 
 DataMem::DataMem()
 {
-    init_mem("/home/sebastian95/QtWorkspace/VectorialProcessor/original.data");
+    init_mem("/home/sebastian95/QtWorkspace/VectorialProcessor/Files/original.data");
 }
 
 void DataMem:: getVector(int dir, unsigned char* vector)
@@ -100,7 +100,7 @@ void DataMem::init_mem(const char *filename)
 void DataMem::write_image(){
     FILE * pFile;
 
-    pFile = fopen ("/home/sebastian95/QtWorkspace/VectorialProcessor/myfile.data", "wb");
+    pFile = fopen ("/home/sebastian95/QtWorkspace/VectorialProcessor/Files/myfile.data", "wb");
     fwrite (mem , sizeof(char), size, pFile);
     fclose (pFile);
 }

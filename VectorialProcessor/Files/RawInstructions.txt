@@ -1,0 +1,8 @@
+add(ss)nc S1, S0, #00100  //Cargo la clave xor en S1
+ldv(m)nc     V0, S2,#00000
+ldv(m)nc     V1, S2,#01000
+xor(sv)nc V0, S1,V0
+xor(sv)nc V1, S1,V1
+strv(m)nc    V0, S2,#00000
+strv(m)nc    V1, S2,#01000
+add(ss)nc S2, S2, #10000 //actualizo el indic

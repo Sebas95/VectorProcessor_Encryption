@@ -31,7 +31,7 @@ void Processor::executeInstructions()
     //____________fetch_________________
     bool* pc_wire = new bool[32]();
     bool* pc_mas4 = new bool[32]();
-    pc->
-    converter->printBin(pc_wire,32);
+
+    //converter->printBin(pc_wire,32);
 }
 

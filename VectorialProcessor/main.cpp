@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "parser.h"
 #include "processor.h"
 #include <QApplication>
 #include <QImage>
@@ -53,6 +54,9 @@ int main()
     //QApplication a(argc, argv);
     //MainWindow w;
     //w.show();
+
+    Parser* parser = new Parser();
+    parser->ProcessInstructions();
 
     Processor* processor = new Processor();
     processor->executeInstructions();
