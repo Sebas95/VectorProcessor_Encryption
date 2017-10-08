@@ -21,10 +21,10 @@ void PipeFetchDeco::writeReg(bool* reg)
  */
 void PipeFetchDeco:: getOpcode(bool* bus)
 {
-    bus[0] = reg[28];
-    bus[1] = reg[29];
-    bus[2] = reg[30];
-    bus[2] = reg[31];
+    bus[3] = reg[31-28];
+    bus[2] = reg[31-29];
+    bus[1] = reg[31-30];
+    bus[0] = reg[31-31];
 }
 /** Returns the type of operators (vector-scalar)
  * @brief PipeFetchDeco::getData
@@ -32,8 +32,8 @@ void PipeFetchDeco:: getOpcode(bool* bus)
  */
 void PipeFetchDeco::getData(bool* bus)
 {
-    bus[0] = reg[26];
-    bus[1] = reg[27];
+    bus[1] = reg[31-26];
+    bus[0] = reg[31-27];
 }
 /** Returns the instruction format
  * @brief PipeFetchDeco::getF
@@ -42,7 +42,7 @@ void PipeFetchDeco::getData(bool* bus)
  */
 void PipeFetchDeco::getF(bool* bus)
 {
-    bus[0]=reg[25];
+    bus[0]=reg[31-25];
 }
 /** Receives the condition of the instruction
  * @brief PipeFetchDeco::getCond
@@ -50,53 +50,53 @@ void PipeFetchDeco::getF(bool* bus)
  */
 void PipeFetchDeco::getCond(bool* bus)
 {
-    bus[0] = reg[24];
-    bus[1] = reg[23];
+    bus[1] = reg[31-23];
+    bus[0] = reg[31-24];
 }
 void PipeFetchDeco::getra(bool* bus)
 {
-    bus[0] = reg[19];
-    bus[1] = reg[20];
+    bus[1] = reg[31-19];
+    bus[0] = reg[31-20];
 }
 void PipeFetchDeco::getrb(bool* bus)
 {
-    bus[0] = reg[17];
-    bus[1] = reg[18];
+    bus[1] = reg[31-17];
+    bus[0] = reg[31-18];
 }
 void PipeFetchDeco::getRa(bool* bus)
 {
-    bus[0] = reg[19];
-    bus[1] = reg[20];
+    bus[1] = reg[31-19];
+    bus[0] = reg[31-20];
 }
 void PipeFetchDeco::getRb(bool* bus)
 {
-    bus[0] = reg[17];
-    bus[1] = reg[18];
+    bus[1] = reg[31-17];
+    bus[0] = reg[31-18];
 }
 void PipeFetchDeco::getRc(bool* bus)
 {
-    bus[0] = reg[21];
-    bus[1] = reg[22];
+    bus[1] = reg[31-21];
+    bus[0] = reg[31-22];
 }
 
 void PipeFetchDeco::getImm(bool* bus)
 {
-    bus[0] = reg[0];
-    bus[1] = reg[1];
-    bus[2] = reg[2];
-    bus[3] = reg[3];
-    bus[4] = reg[4];
-    bus[5] = reg[5];
-    bus[6] = reg[6];
-    bus[7] = reg[7];
-    bus[8] = reg[8];
-    bus[9] = reg[9];
-    bus[10] = reg[10];
-    bus[11] = reg[11];
-    bus[12] = reg[12];
-    bus[13] = reg[13];
-    bus[14] = reg[14];
-    bus[15] = reg[15];
-    bus[16] = reg[16];
+    bus[16] = reg[31-0];
+    bus[15] = reg[31-1];
+    bus[14] = reg[31-2];
+    bus[13] = reg[31-3];
+    bus[12] = reg[31-4];
+    bus[11] = reg[31-5];
+    bus[10] = reg[31-6];
+    bus[9] = reg[31-7];
+    bus[8] = reg[31-8];
+    bus[7] = reg[31-9];
+    bus[6] = reg[31-10];
+    bus[5] = reg[31-11];
+    bus[4] = reg[31-12];
+    bus[3] = reg[31-13];
+    bus[2] = reg[31-14];
+    bus[1] = reg[31-15];
+    bus[0] = reg[31-16];
 
 }

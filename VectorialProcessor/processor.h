@@ -14,14 +14,18 @@
 #include "registerbankvector.h"
 #include "registersbankscalar.h"
 #include "int_bin_converter.h"
-
+#include <pthread.h>
+#include <unistd.h>
 
 class Processor
 {
 private:
+
+public:
+    Processor();
     Int_Bin_converter* converter;
     //___________fetch___________
-    InstructionMem* data_memory;
+    InstructionMem* instruction_memory;
     //Pc* pc ;
     //___________deco___________
     PipeFetchDeco* pipe_f_d;
@@ -40,10 +44,13 @@ private:
     //____________wb____________
     PipeExeWb* pipe_exe_wb;
     Mux32* mux_seldat;
-public:
-    Processor();
-    void executeInstructions();
+
+    bool start;
 
 };
+
+void executeInstructions();
+void* fetch(void*);
+void* decode(void*);
 
 #endif // PROCESSOR_H

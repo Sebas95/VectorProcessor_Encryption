@@ -8,7 +8,7 @@ InstructionMem::InstructionMem()
 
 void InstructionMem:: getInstruction(int dir, bool *instruction)
 {
-    for(int y = 0 ; y < 32 ; y++)
+    for(int y = 31 ; y > -1 ; y = y-1)
     {
         instruction[y] = mem[dir + y];
     }
@@ -41,7 +41,7 @@ void InstructionMem::init_mem(const char *filename)
         // and buffer is now officially a string
         buffer[string_size] = '\0';
         printf("The size of the instructions mem is %d \n",string_size);
-        printf("%s \n",buffer);
+       // printf("%s \n",buffer);
         if (string_size != read_size)
         {
             //printf("%s \n","Error");

@@ -58,8 +58,8 @@ int main()
     Parser* parser = new Parser();
     parser->ProcessInstructions();
 
-    Processor* processor = new Processor();
-    processor->executeInstructions();
+
+    executeInstructions();
 
 
     //return a.exec();

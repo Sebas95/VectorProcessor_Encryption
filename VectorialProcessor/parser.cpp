@@ -52,11 +52,14 @@ Parser::ProcessInstructions(){
                     if(iteration == 4) AddOperand(token,instruction);
                     if(iteration == 5)
                     {
-                        imm[12] = token[1];
-                        imm[13] = token[2];
-                        imm[14] = token[3];
-                        imm[15] = token[4];
-                        imm[16] = token[5];
+                        imm[9] = token[1];
+                        imm[10] = token[2];
+                        imm[11] = token[3];
+                        imm[12] = token[4];
+                        imm[13] = token[5];
+                        imm[14] = token[6];
+                        imm[15] = token[7];
+                        imm[16] = token[8];
                         AddOperand(token,instruction);
                     }
                 }
@@ -72,11 +75,14 @@ Parser::ProcessInstructions(){
                         AddOperand(token,instruction); //ra place
                     if(iteration == 5) //rb
                     {
-                        imm[12] = token[1];
-                        imm[13] = token[2];
-                        imm[14] = token[3];
-                        imm[15] = token[4];
-                        imm[16] = token[5];
+                        imm[9] = token[1];
+                        imm[10] = token[2];
+                        imm[11] = token[3];
+                        imm[12] = token[4];
+                        imm[13] = token[5];
+                        imm[14] = token[6];
+                        imm[15] = token[7];
+                        imm[16] = token[8];
 
                         AddOperand(temp,instruction); //ra place
                     }

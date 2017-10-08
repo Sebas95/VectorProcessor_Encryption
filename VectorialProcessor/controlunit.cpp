@@ -5,7 +5,7 @@ ControlUnit::ControlUnit()
 
 }
 
-void ControlUnit::obtainControl(bool opcode[],bool data[],bool F)
+void ControlUnit::obtainControl(bool* opcode,bool* data,bool* F)
 {
 
 

@@ -9,7 +9,7 @@ RegistersBankScalar::RegistersBankScalar()
 }
 
 
-void RegistersBankScalar::readVector(int dir,unsigned char* s)
+void RegistersBankScalar::readScalar(int dir,unsigned char* s)
 {
     if(dir==1)
         s = s1;
