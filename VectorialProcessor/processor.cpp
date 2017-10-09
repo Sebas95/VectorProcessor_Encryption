@@ -25,7 +25,7 @@ Processor::Processor()
     //____________wb____________
     pipe_exe_wb = new PipeExeWb();
     mux_seldat = new Mux32("Mux seldat");
-
+    mux_sel_vec = new Mux64("mux vector sel");
     start = false;
 
 }
@@ -119,7 +119,9 @@ void* decode(void* processor_obj)
     processor->reg_bank_v->readVector( converter->convert(Ra,2) , content_Ra);
     processor->reg_bank_v->readVector( converter->convert(Rb,2) , content_Rb);
     printf("contetn RB en deco : %c %c %c %c %c %c %c %c \n",content_Rb[0],content_Rb[1],content_Rb[2],content_Rb[3],content_Rb[4],content_Rb[5],content_Rb[6],content_Rb[7]);
+
     processor->control_unit->obtainControl(opcode,Data,F);
+
     processor->pipe_d_e->cond   =  Cond;
     processor->pipe_d_e->ctrl_s =  processor->control_unit->ctrl_s;
     processor->pipe_d_e->ctrl_v =  processor->control_unit->ctrl_v;
@@ -143,6 +145,7 @@ void* decode(void* processor_obj)
     processor->pipe_d_e->rb[2]     =  content_rb[2];
     processor->pipe_d_e->rb[3]     =  content_rb[3];
     processor->pipe_d_e->sel_dat=  processor->control_unit->sel_dat;
+     processor->pipe_d_e->sel_vec=  processor->control_unit->sel_vec;
     processor->pipe_d_e->sel_opA=  processor->control_unit->sel_opA;
     processor->pipe_d_e->sel_opb=  processor->control_unit->sel_opb;
     processor->pipe_d_e->WE     = processor->control_unit->WE;
@@ -193,7 +196,7 @@ void* execution(void* processor_obj)
 printf(" ALU paralela exe : %c %c %c %c %c %c %c %c \n",aluResult64[0],aluResult64[1],aluResult64[2],aluResult64[3],aluResult64[4],aluResult64[5],aluResult64[6],aluResult64[7] );
   //  printf(" Alu result  %d \n",*(int*)aluResult32);
 
-        //condition unit
+    //condition unit
     processor->cond_unit->write_flags(Z,processor->pipe_d_e->instr_enable);
     processor->cond_unit->eval_conditions(processor->pipe_d_e->WE, & processor->pipe_d_e->WE_s,
                                               & processor->pipe_d_e->WE_v,processor->pipe_d_e->cond);
@@ -220,11 +223,21 @@ printf(" ALU paralela exe : %c %c %c %c %c %c %c %c \n",aluResult64[0],aluResult
     processor->pipe_exe_wb->Dout64[6] = memOut64[6];
     processor->pipe_exe_wb->Dout64[7] = memOut64[7];
 
+    processor->pipe_exe_wb->AluResult64[0] = aluResult64[0];
+    processor->pipe_exe_wb->AluResult64[1] = aluResult64[1];
+    processor->pipe_exe_wb->AluResult64[2] = aluResult64[2];
+    processor->pipe_exe_wb->AluResult64[3] = aluResult64[3];
+    processor->pipe_exe_wb->AluResult64[4] = aluResult64[4];
+    processor->pipe_exe_wb->AluResult64[5] = aluResult64[5];
+    processor->pipe_exe_wb->AluResult64[6] = aluResult64[6];
+    processor->pipe_exe_wb->AluResult64[7] = aluResult64[7];
+
 
 
     processor->pipe_exe_wb->Dout32 = memOut32;
     processor->pipe_exe_wb->rc_dir = processor->pipe_d_e->dir_rc;
     processor->pipe_exe_wb->sel_dat =processor->pipe_d_e->sel_dat ;
+    processor->pipe_exe_wb->sel_vec =processor->pipe_d_e->sel_vec ;
     processor->pipe_exe_wb->we_s =processor->pipe_d_e->WE_s ;
     processor->pipe_exe_wb->we_v =processor->pipe_d_e->WE_v;
 
@@ -232,6 +245,7 @@ printf(" ALU paralela exe : %c %c %c %c %c %c %c %c \n",aluResult64[0],aluResult
 }
 
 unsigned char* sel_dat_out = new unsigned char[4]();
+unsigned char* sel_vec_out = new unsigned char[8]();
 
 
 void* write_back(void*processor_obj)
@@ -242,13 +256,16 @@ void* write_back(void*processor_obj)
     //mux
     sel_dat_out = processor->mux_seldat->multiplex( processor->pipe_exe_wb->sel_dat,
                                           processor->pipe_exe_wb->AluResult32,processor->pipe_exe_wb->Dout32 );
+
+    sel_vec_out = processor->mux_sel_vec->multiplex2chan(processor->pipe_exe_wb->sel_vec,
+                                                         processor->pipe_exe_wb->Dout64,processor->pipe_exe_wb->AluResult64);
     //escritura al banco escalar
     processor->reg_bank_s->writeScalar(processor->pipe_exe_wb->rc_dir,sel_dat_out,processor->pipe_exe_wb->we_s);
 
 
     printf(" ALU paralela wb  : %c %c %c %c %c %c %c %c \n",processor->pipe_exe_wb->Dout64[0],processor->pipe_exe_wb->Dout64[1],processor->pipe_exe_wb->Dout64[2],processor->pipe_exe_wb->Dout64[3],processor->pipe_exe_wb->Dout64[4],processor->pipe_exe_wb->Dout64[5],processor->pipe_exe_wb->Dout64[6],processor->pipe_exe_wb->Dout64[7] );
     //escritura al banco vectorial
-    processor->reg_bank_v->writeVector(processor->pipe_exe_wb->rc_dir,processor->pipe_exe_wb->Dout64,
+    processor->reg_bank_v->writeVector(processor->pipe_exe_wb->rc_dir,sel_vec_out,
                                            processor->pipe_exe_wb->we_v);
 
 

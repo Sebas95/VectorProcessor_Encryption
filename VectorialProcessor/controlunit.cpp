@@ -166,6 +166,12 @@ void ControlUnit::obtainControl(bool* opcode,bool* data,bool* F)
         sel_dat = true;
     else
         sel_dat = false;
+    //----------------------------
+
+    if(input == 0) //para ldv
+        sel_vec = true;
+    else
+        sel_vec = false;
 
     //-----------------------------
     if(!F[0])

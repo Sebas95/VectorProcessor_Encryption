@@ -45,6 +45,7 @@ public:
     //____________wb____________
     PipeExeWb* pipe_exe_wb;
     Mux32* mux_seldat;
+    Mux64*mux_sel_vec;
 
     bool start;
 

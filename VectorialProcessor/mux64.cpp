@@ -29,3 +29,14 @@ unsigned char* Mux64::multiplex(bool select[],unsigned char* chan0, unsigned cha
     }
 
 }
+unsigned char* Mux64::multiplex2chan(bool select, unsigned char* chan0, unsigned char* chan1)
+{
+    if(select)
+    {
+        return chan0;
+    }
+    else
+    {
+        return chan1;
+    }
+}

@@ -14,6 +14,7 @@ public:
     int ctrl_v;
     int ctrl_s;
     bool sel_dat;
+    bool sel_vec;
     bool instr_enable;
     bool sel_opb;
     bool* sel_opA;
