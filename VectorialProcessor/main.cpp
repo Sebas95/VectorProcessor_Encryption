@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-#include "parser.h"
 #include "processor.h"
 #include <QApplication>
 #include <QImage>
@@ -51,14 +50,14 @@ char* ReadFile(const char *filename)
 //int main(int argc, char *argv[])
 int main()
 {
-
+    char s = 'a'  ^ '#';
+    printf("a XOR D: %c \n",s );
 
     //QApplication a(argc, argv);
     //MainWindow w;
     //w.show();
 
-    Parser* parser = new Parser();
-    parser->ProcessInstructions();
+
 
 
     executeInstructions();

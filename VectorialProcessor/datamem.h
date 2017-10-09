@@ -5,6 +5,7 @@
 #include <string>
 #include <stdlib.h>
 #include <fstream>
+#include "parser.h"
 
 using namespace std;
 class DataMem

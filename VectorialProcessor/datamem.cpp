@@ -4,6 +4,8 @@
 DataMem::DataMem()
 {
     init_mem("/home/sebastian95/QtWorkspace/VectorialProcessor/Files/original.data");
+    Parser* parser = new Parser();
+    parser->ProcessInstructions(size);
 }
 
 void DataMem:: getVector(int dir, unsigned char* vector)
@@ -17,6 +19,7 @@ void DataMem:: getVector(int dir, unsigned char* vector)
     vector[5] = mem[dir+5];
     vector[6] = mem[dir+6];
     vector[7] = mem[dir+7];
+
 
 }
 
@@ -49,6 +52,16 @@ void DataMem:: write(bool* WE, unsigned char* direction, unsigned char* Din32, u
        mem[dir+5] = Din64[5];
        mem[dir+6] = Din64[6];
        mem[dir+7] = Din64[7];
+
+       printf("write in dir  %d ",dir);
+       printf(" %c ",mem[dir+0]);
+       printf(" %c ",mem[dir+1]);
+       printf(" %c ",mem[dir+2]);
+       printf(" %c ",mem[dir+3]);
+       printf(" %c ",mem[dir+4]);
+       printf(" %c ",mem[dir+5]);
+       printf(" %c ",mem[dir+6]);
+       printf(" %c\n",mem[dir+7]);
    }
 
 }

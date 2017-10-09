@@ -7,7 +7,7 @@ Parser::Parser()
 
 
 void
-Parser::ProcessInstructions(){
+Parser::ProcessInstructions(int image_size){
     FILE *archivo;
 
     char caracteres[100];
@@ -18,13 +18,18 @@ Parser::ProcessInstructions(){
         exit(1);
 
     FILE * pFile;
-
+    bool entro_repeat = false;
+    int replicated_instr=13;
+    char* instructions_replicated_buffer = new char[replicated_instr*32]();
+    int index_replicated = 0;
     pFile = fopen ("/home/sebastian95/QtWorkspace/VectorialProcessor/Files/Instructions.txt", "wb");
+
     while (feof(archivo) == 0)
     {
         fgets(caracteres,100,archivo);
         char* token = strtok(caracteres, "( ) , " );
         bool comment = false;
+        bool macro = false;
         char* instruction = new char[32]();
         bool inmediato = false;
         bool* instr_mem = new bool();
@@ -39,8 +44,14 @@ Parser::ProcessInstructions(){
                 comment = true;
                 printf (" %s ","\n");
             }
+            if(strncmp(token ,"-repeat",7) == 0)
+            {
+                macro = true;
+                entro_repeat = true;
+            }
+
             if(isImm(token)) inmediato = true;
-            if(!comment)
+            if(!comment && !macro)
             {
                 AddOpcode(token,instruction,instr_mem);
                 AddDataType(token,instruction);
@@ -101,13 +112,31 @@ Parser::ProcessInstructions(){
               instruction[6]='0';
               strcat(instruction, "00000000000000000");
           }
-          if((feof(archivo) == 0))
+          if((feof(archivo) == 0) && !macro)
           {
               printf (" La instrucción es: %s\n\n",instruction);
               fwrite (instruction , sizeof(char), 32, pFile);
+              if(entro_repeat) //copiando enel bufer de replicas
+              {
+                  for(int i = 0; i< 32;i++)
+                  {
+                    instructions_replicated_buffer[index_replicated+i] = instruction[i];
+                  }
+                  index_replicated = index_replicated +32;
+              }
           }
 
+
     }
+
+    for(int y = 0 ; y< image_size/32 -1 ; y++)
+    {
+        fwrite (instructions_replicated_buffer , sizeof(char), replicated_instr*32, pFile);
+        //printf (" La instrucción es: %s\n\n",instructions_replicated_buffer);
+
+    }
+
+
     fclose (pFile);
     fclose(archivo);
 }

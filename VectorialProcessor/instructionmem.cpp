@@ -4,6 +4,7 @@ InstructionMem::InstructionMem()
 {
     init_mem("/home/sebastian95/QtWorkspace/VectorialProcessor/Files/Instructions.txt");
 
+
 }
 
 void InstructionMem:: getInstruction(int dir, bool *instruction)

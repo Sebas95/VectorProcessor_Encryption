@@ -19,7 +19,10 @@ void ALU8b::operate(int ctrl, unsigned char opa,  unsigned char opb, unsigned ch
     else if(ctrl ==4  ) //4
            *res = (int)opa | (int)opb;
     else if(ctrl ==5  )
+    {
            *res = (int)opa ^ (int)opb;
+        printf("xor res: %c xor %c =  %c \n",opa,opb, opa^ opb);
+    }
     else if(ctrl ==6  )
            *res = (int)opa >> (int)opb;
     else if(ctrl ==7  )

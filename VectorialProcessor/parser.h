@@ -24,7 +24,7 @@ public:
 
 
     Parser();
-    void ProcessInstructions();
+    void ProcessInstructions(int image_size);
 };
 
 #endif // PARSER_H
