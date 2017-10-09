@@ -10,7 +10,7 @@ void InstructionMem:: getInstruction(int dir, bool *instruction)
 {
     for(int y = 31 ; y > -1 ; y = y-1)
     {
-        instruction[y] = mem[dir + y];
+        instruction[y] = mem[dir*8 + y];
     }
 
 }
@@ -59,11 +59,7 @@ void InstructionMem::init_mem(const char *filename)
                 mem[x] = true;
 
         }
-        for(int x = 0; x< size ; x++)
-        {
-            printf("%d",mem[x]);
 
-        }
 
 
         // Always remember to close the file.
