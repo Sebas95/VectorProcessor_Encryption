@@ -76,7 +76,7 @@ void DataMem::init_mem(const char *filename)
         // fread doesn't set it so put a \0 in the last position
         // and buffer is now officially a string
         mem[string_size] = '\0';
-        printf("The size of the image is %d \n",string_size);
+        printf("\n\n The size of the image is %d \n",string_size);
         if (string_size != read_size)
         {
             //printf("%s \n","Error");

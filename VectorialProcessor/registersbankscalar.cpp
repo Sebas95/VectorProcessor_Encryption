@@ -41,7 +41,11 @@ void RegistersBankScalar::writeScalar(int dir_rc,unsigned char* s,bool we_s)
             *s2 = *s;
         }
         else if(dir_rc==2)
+        {
+
             *s3 = *s;
+            printf("wrote scalar 2 %d \n", *(int*)s3);
+        }
         else
             *s4 = *s;
     }

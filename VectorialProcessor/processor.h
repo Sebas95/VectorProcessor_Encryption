@@ -55,6 +55,6 @@ void* fetch(void*);
 void* decode(void*);
 void* execution(void*);
 void* write_back(void*);
-void* run_clk(void* unused);
+
 
 #endif // PROCESSOR_H

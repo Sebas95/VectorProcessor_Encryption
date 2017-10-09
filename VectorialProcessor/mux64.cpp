@@ -7,15 +7,15 @@ Mux64::Mux64(string name)
 
 unsigned char* Mux64::multiplex(bool select[],unsigned char* chan0, unsigned char* chan1,unsigned char* chan2)
 {
-    if(!select[1] && !select[0] )
+    if(!select[0] && !select[1] )
     {
         return chan0;
     }
-    else if( !select[1] && select[0] )
+    else if( !select[0] && select[1] )
     {
         return chan1;
     }
-    else if( select[1] && !select[0] )
+    else if( select[0] && !select[1] )
     {
         return chan2;
     }

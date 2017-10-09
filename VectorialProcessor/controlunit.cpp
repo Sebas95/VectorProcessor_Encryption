@@ -21,8 +21,8 @@ void ControlUnit::obtainControl(bool* opcode,bool* data,bool* F)
         case 0: //ldv
             ctrl_v = 0; //x
             ctrl_s = 0;
-            sel_opA[0] = true; //x
-            sel_opA[1] = true; //x
+            sel_opA[0] = false; //x
+            sel_opA[1] = false; //x
             break;
 
         case 1: //strv

@@ -40,7 +40,7 @@ void InstructionMem::init_mem(const char *filename)
         // fread doesn't set it so put a \0 in the last position
         // and buffer is now officially a string
         buffer[string_size] = '\0';
-        printf("The size of the instructions mem is %d \n",string_size);
+        printf("\nThe size of the instructions mem is %d \n",string_size);
        // printf("%s \n",buffer);
         if (string_size != read_size)
         {
