@@ -5,7 +5,7 @@ Mux64::Mux64(string name)
      this->name = name;
 }
 
-unsigned char* Mux64::multiplex(bool select[2],unsigned char chan0[8], unsigned char chan1[8],unsigned char chan2[8])
+unsigned char* Mux64::multiplex(bool select[],unsigned char* chan0, unsigned char* chan1,unsigned char* chan2)
 {
     if(!select[1] && !select[0] )
     {

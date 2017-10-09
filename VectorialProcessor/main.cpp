@@ -51,6 +51,8 @@ char* ReadFile(const char *filename)
 //int main(int argc, char *argv[])
 int main()
 {
+
+
     //QApplication a(argc, argv);
     //MainWindow w;
     //w.show();
@@ -62,8 +64,9 @@ int main()
     executeInstructions();
 
 
+
     //return a.exec();
-    return 0;
+     pthread_exit(NULL); //last thing to do
 }
 
 

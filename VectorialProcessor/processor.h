@@ -3,6 +3,7 @@
 #include "alu32b.h"
 #include "alu64.h"
 #include "controlunit.h"
+#include "conditionunit.h"
 #include "datamem.h"
 #include "instructionmem.h"
 #include "mux32.h"
@@ -39,7 +40,7 @@ public:
     Mux64* mux_opA;
     ALU32b* alu32;
     ALU64* alu64;
-    ControlUnit* cond_unit;
+    ConditionUnit* cond_unit;
     DataMem* data_mem;
     //____________wb____________
     PipeExeWb* pipe_exe_wb;
@@ -52,5 +53,6 @@ public:
 void executeInstructions();
 void* fetch(void*);
 void* decode(void*);
+void* execution(void*);
 
 #endif // PROCESSOR_H

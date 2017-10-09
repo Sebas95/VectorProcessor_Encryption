@@ -5,7 +5,7 @@ Mux32::Mux32(string name)
     this->name = name;
 }
 
-unsigned char* Mux32::multiplex(bool select,unsigned char chan0[4], unsigned char chan1[4])
+unsigned char* Mux32::multiplex(bool select,unsigned char* chan0, unsigned char* chan1)
 {
     if(!select)
     {

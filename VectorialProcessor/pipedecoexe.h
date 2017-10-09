@@ -8,22 +8,22 @@ class PipeDecoExe
 
 public:
     PipeDecoExe();
-    bool WE[2];
+    bool* WE;
     bool WE_v;
     bool WE_s;
-    bool ctrl_v;
-    bool ctrl_s;
+    int ctrl_v;
+    int ctrl_s;
     bool sel_dat;
     bool instr_enable;
     bool sel_opb;
-    bool sel_opA[2];
-    bool cond[2];
+    bool* sel_opA;
+    bool* cond;
 
-    unsigned char* ra[4];
-    unsigned char* rb[4];
-    unsigned char* Ra[8];
-    unsigned char* Rb[8];
-    unsigned char* imm[4];
+    unsigned char* ra;
+    unsigned char* rb;
+    unsigned char* Ra;
+    unsigned char* Rb;
+    unsigned char* imm;
     int dir_rc;
 
 };

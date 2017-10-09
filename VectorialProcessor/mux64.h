@@ -10,7 +10,7 @@ private:
     string name="";
 public:
     Mux64(string);
-    unsigned char* multiplex(bool select[2],unsigned char chan0[8], unsigned char chan1[8],unsigned char chan2[8]);
+    unsigned char* multiplex(bool select[], unsigned char* chan0, unsigned char* chan1, unsigned char* chan2);
 };
 
 #endif // MUX64_H

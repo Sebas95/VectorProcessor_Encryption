@@ -2,6 +2,8 @@
 
 ControlUnit::ControlUnit()
 {
+     WE = new bool[2]();
+     sel_opA = new bool[2]();
 
 }
 
@@ -12,6 +14,7 @@ void ControlUnit::obtainControl(bool* opcode,bool* data,bool* F)
     WE[0] = false;
     WE[1] = false;
     int input = getIntOpcode(opcode);
+
     switch ( input )
     {
 
@@ -105,26 +108,27 @@ void ControlUnit::obtainControl(bool* opcode,bool* data,bool* F)
           break;
     }
 
-    if(!data[1] && !data[0]) //vector-vector
+    if(!data[0] && !data[1]) //vector-vector
     {
         WE_v = true;
         WE_s = false;
         sel_opA[0] = true;
         sel_opA[1] = false;
     }
-    else if(!data[1] && data[0])  //escalar-vector
+    else if(!data[0] && data[1])  //escalar-vector
     {
         WE_v = true;
         WE_s = false;
         sel_opA[0] = false;
         sel_opA[1] = false;
     }
-    else if(data[1] && !data[0]) //escalar-escalar
+
+    else if(data[0] && !data[1])  //escalar-vector
     {
         WE_v = false;
         WE_s = true;
-        sel_opA[0] = false;//x
-        sel_opA[1] = false;//x
+        sel_opA[0] = false;
+        sel_opA[1] = false;
     }
     else //memory instruction
     {
@@ -164,7 +168,7 @@ void ControlUnit::obtainControl(bool* opcode,bool* data,bool* F)
         sel_dat = false;
 
     //-----------------------------
-    if(!F)
+    if(!F[0])
         sel_opb = false ;
     else
         sel_opb = true ;
@@ -174,39 +178,54 @@ void ControlUnit::obtainControl(bool* opcode,bool* data,bool* F)
 
 
 
-int ControlUnit::getIntOpcode(bool opcode[])
+int ControlUnit::getIntOpcode(bool* opcode)
 {
-    if( !opcode[3] && !opcode[2] && !opcode[1] && !opcode[0])
+    if( !opcode[0] && !opcode[1] && !opcode[2] && !opcode[3])
         return 0;
-    if( !opcode[3] && !opcode[2] && !opcode[1] && opcode[0])
+
+    if( !opcode[0] && !opcode[1] && !opcode[2] && opcode[3])
         return 1;
-    if( !opcode[3] && !opcode[2] && opcode[1] && !opcode[0])
+
+    if( !opcode[0] && !opcode[1] && opcode[2] && !opcode[3])
         return 2;
-    if( !opcode[3] && !opcode[2] && opcode[1] && opcode[0])
+
+    if( !opcode[0] && !opcode[1] && opcode[3] && opcode[3])
         return 3;
-    if( !opcode[3] && opcode[2] && !opcode[1] && !opcode[0])
+
+    if( !opcode[0] && opcode[1] && !opcode[2] && !opcode[3])
         return 4;
-    if( !opcode[3] && opcode[2] && !opcode[1] && opcode[0])
+
+    if( !opcode[0] && opcode[1] && !opcode[2] && opcode[3])
         return 5;
-    if( !opcode[3] && opcode[2] && opcode[1] && !opcode[0])
+
+    if( !opcode[0] && opcode[1] && opcode[2] && !opcode[3])
         return 6;
-    if( !opcode[3] && opcode[2] && opcode[1] && opcode[0])
+
+    if( !opcode[0] && opcode[1] && opcode[2] && opcode[3])
         return 7;
-    if( opcode[3] && !opcode[2] && !opcode[1] && !opcode[0])
+
+    if( opcode[0] && !opcode[1] && !opcode[2] && !opcode[3])
         return 8;
-    if( opcode[3] && !opcode[2] && !opcode[1] && opcode[0])
+
+    if( opcode[0] && !opcode[1] && !opcode[2] && opcode[3])
         return 9;
-    if( opcode[3] && !opcode[2] && opcode[1] && !opcode[0])
+
+    if( opcode[0] && !opcode[1] && opcode[2] && !opcode[3])
         return 10;
-    if( opcode[3] && !opcode[2] && opcode[1] && opcode[0])
+
+    if( opcode[0] && !opcode[1] && opcode[2] && opcode[3])
         return 11;
-    if( opcode[3] && opcode[2] && !opcode[1] && !opcode[0])
+
+    if( opcode[0] && opcode[1] && !opcode[2] && !opcode[3])
         return 12;
-    if( opcode[3] && opcode[2] && !opcode[1] && opcode[0])
+
+    if( opcode[0] && opcode[1] && !opcode[2] && opcode[3])
         return 13;
-    if( !opcode[3] && !opcode[2] && !opcode[1] && opcode[0])
+
+    if( !opcode[0] && !opcode[1] && !opcode[2] && opcode[3])
         return 14;
-    if( opcode[3] && opcode[2] && opcode[1] && opcode[0])
+
+    if( opcode[0] && opcode[1] && opcode[2] && opcode[3])
         return 15;
 
 }

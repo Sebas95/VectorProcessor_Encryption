@@ -28,7 +28,7 @@ void DataMem:: getScalar(int dir, unsigned char* vector)
     vector[3] = mem[dir+3];
 }
 
-void DataMem:: write(bool WE[], unsigned char* direction, unsigned char* Din32, unsigned char* Din64)
+void DataMem:: write(bool* WE, unsigned char* direction, unsigned char* Din32, unsigned char* Din64)
 {
     int dir = *(int*)direction;
 

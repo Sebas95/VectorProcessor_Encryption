@@ -18,7 +18,7 @@ public:
     DataMem();
     void getVector(int dir, unsigned char* vector);
     void getScalar(int dir, unsigned char* vector);
-    void write(bool WE[], unsigned char* direction, unsigned char* Din32, unsigned char* Din64);
+    void write(bool* WE, unsigned char* direction, unsigned char* Din32, unsigned char* Din64);
     void write_image();
 };
 

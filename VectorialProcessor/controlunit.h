@@ -9,7 +9,7 @@ private:
 public:
     ControlUnit();
     void obtainControl(bool* opcode,bool* data,bool* F);
-    bool WE[2];
+    bool* WE;
     bool WE_v;
     bool WE_s;
     int ctrl_v;
@@ -17,9 +17,9 @@ public:
     bool sel_dat;
     bool instr_enable;
     bool sel_opb;
-    bool sel_opA[2];
+    bool* sel_opA;
 
-    int getIntOpcode(bool opcode[]);
+    int getIntOpcode(bool* opcode);
 };
 
 #endif // CONTROLUNIT_H

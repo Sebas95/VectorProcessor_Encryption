@@ -5,7 +5,7 @@ Int_Bin_converter::Int_Bin_converter()
 {
 
 }
-int Int_Bin_converter::convert(bool reg[],int lenght)
+int Int_Bin_converter::convert(bool* reg,int lenght)
 {
     int result = 0;
     int exp = lenght-1;
@@ -19,7 +19,7 @@ int Int_Bin_converter::convert(bool reg[],int lenght)
 }
 
 
-void Int_Bin_converter::printBin(bool reg [],int lenght)
+void Int_Bin_converter::printBin(bool* reg,int lenght)
 {
 
     printf("%s"," [ " );
