@@ -1,4 +1,4 @@
-add(ss)nc    S1, S0, #00100011  //Cargo la clave xor en S1
+add(ss)nc    S1, S0, #11111111  //Cargo la clave xor en S1
 -repeat
 ldv(m)nc     V0, S2, #00000000
 ldv(m)nc     V1, S2, #00001000

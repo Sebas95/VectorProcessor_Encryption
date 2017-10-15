@@ -69,7 +69,7 @@ void RegistersBankScalar::writeScalar(int dir_rc,unsigned char* s,bool we_s)
             s3[2] = s[2];
             s3[3] = s[3];
 
-            //printf("wrote scalar 2 %d \n", *(int*)s3);
+            printf("wrote scalar S2 %d \n", *(int*)s3);
         }
         else
         {
