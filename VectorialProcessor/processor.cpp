@@ -118,7 +118,8 @@ void* decode(void* processor_obj)
 
     processor->reg_bank_v->readVector( converter->convert(Ra,2) , content_Ra);
     processor->reg_bank_v->readVector( converter->convert(Rb,2) , content_Rb);
-    printf("contetn RB en deco : %c %c %c %c %c %c %c %c \n",content_Rb[0],content_Rb[1],content_Rb[2],content_Rb[3],content_Rb[4],content_Rb[5],content_Rb[6],content_Rb[7]);
+
+    //printf("contetn RB en deco : %c %c %c %c %c %c %c %c \n",content_Rb[0],content_Rb[1],content_Rb[2],content_Rb[3],content_Rb[4],content_Rb[5],content_Rb[6],content_Rb[7]);
 
     processor->control_unit->obtainControl(opcode,Data,F);
 
@@ -169,77 +170,65 @@ unsigned char* replicatedScalar = new unsigned char[8]();
 
 void* execution(void* processor_obj)
 {
-    Int_Bin_converter* converter =  new Int_Bin_converter();
-    Processor* processor =  (Processor*)processor_obj;
 
-    replicatedScalar[0] = processor->pipe_d_e->ra[0];
-    replicatedScalar[1] = processor->pipe_d_e->ra[0];
-    replicatedScalar[2] = processor->pipe_d_e->ra[0];
-    replicatedScalar[3] = processor->pipe_d_e->ra[0];//es little endian
-    replicatedScalar[4] = processor->pipe_d_e->ra[0];//menos significativo al inicio
-    replicatedScalar[5] = processor->pipe_d_e->ra[0];
-    replicatedScalar[6] = processor->pipe_d_e->ra[0];
-    replicatedScalar[7] = processor->pipe_d_e->ra[0];
 
-    muxbResult = processor->mux_opb->multiplex( processor->pipe_d_e->sel_opb, processor->pipe_d_e->rb,
-                                                    processor->pipe_d_e->imm);
-    muxAResult = processor->mux_opA->multiplex( processor->pipe_d_e->sel_opA,replicatedScalar,
-                                                    processor->pipe_d_e->Ra,zero);
+    Processor* p =  (Processor*)processor_obj;
+
+    for (int i = 0; i< 8 ; i++)
+        replicatedScalar[i] = p->pipe_d_e->ra[0]; //es little endian
+
+    muxbResult = p->mux_opb->multiplex( p->pipe_d_e->sel_opb, p->pipe_d_e->rb,
+                                                    p->pipe_d_e->imm);
+
+    printf("SElop_A ; %d %d \n",p->pipe_d_e->sel_opA[1],p->pipe_d_e->sel_opA[0]);
+
+    muxAResult = p->mux_opA->multiplex( p->pipe_d_e->sel_opA,replicatedScalar,
+                                                    p->pipe_d_e->Ra,zero);
     printf(" result mux A : %c %c %c %c %c %c %c %c \n",muxAResult[0],muxAResult[1],muxAResult[2],muxAResult[3],muxAResult[4],muxAResult[5],muxAResult[6],muxAResult[7] );
-    printf(" op B : %c %c %c %c %c %c %c %c \n",processor->pipe_d_e->Rb[0],processor->pipe_d_e->Rb[1],processor->pipe_d_e->Rb[2],processor->pipe_d_e->Rb[3],processor->pipe_d_e->Rb[4],processor->pipe_d_e->Rb[5],processor->pipe_d_e->Rb[6],processor->pipe_d_e->Rb[7] );
+    printf(" op B : %c %c %c %c %c %c %c %c \n",p->pipe_d_e->Rb[0],p->pipe_d_e->Rb[1],p->pipe_d_e->Rb[2],p->pipe_d_e->Rb[3],p->pipe_d_e->Rb[4],p->pipe_d_e->Rb[5],p->pipe_d_e->Rb[6],p->pipe_d_e->Rb[7] );
 
 
     //ALUs
-    processor->alu32->operate(processor->pipe_d_e->ctrl_s,processor->pipe_d_e->ra,
-                                  muxbResult,Z,C,aluResult32);
-    processor->alu64->operate(processor->pipe_d_e->ctrl_v,muxAResult,processor->pipe_d_e->Rb,aluResult64);
-printf(" ALU paralela exe : %c %c %c %c %c %c %c %c \n",aluResult64[0],aluResult64[1],aluResult64[2],aluResult64[3],aluResult64[4],aluResult64[5],aluResult64[6],aluResult64[7] );
+    p->alu32->operate(p->pipe_d_e->ctrl_s,p->pipe_d_e->ra,muxbResult,Z,C,aluResult32);
+
+    p->alu64->operate(p->pipe_d_e->ctrl_v,muxAResult,p->pipe_d_e->Rb,aluResult64);
+    printf(" ALU paralela exe : %c %c %c %c %c %c %c %c \n",aluResult64[0],aluResult64[1],aluResult64[2],aluResult64[3],aluResult64[4],aluResult64[5],aluResult64[6],aluResult64[7] );
   //  printf(" Alu result  %d \n",*(int*)aluResult32);
 
     //condition unit
-    processor->cond_unit->write_flags(Z,processor->pipe_d_e->instr_enable);
-    processor->cond_unit->eval_conditions(processor->pipe_d_e->WE, & processor->pipe_d_e->WE_s,
-                                              & processor->pipe_d_e->WE_v,processor->pipe_d_e->cond);
+    p->cond_unit->write_flags(Z,p->pipe_d_e->instr_enable);
+    p->cond_unit->eval_conditions(p->pipe_d_e->WE, & p->pipe_d_e->WE_s,
+                                              & p->pipe_d_e->WE_v,p->pipe_d_e->cond);
 
 
    // printf("alu result64 %s  ", aluResult64);
         //memory
-    processor->data_mem->getScalar(*(int*)aluResult32,memOut32);
-    processor->data_mem->getVector(*(int*)aluResult32,memOut64);
-    processor->data_mem->write(processor->pipe_d_e->WE,aluResult32, processor->pipe_d_e->rb,aluResult64);
+    p->data_mem->getScalar(*(int*)aluResult32,memOut32);
+    p->data_mem->getVector(*(int*)aluResult32,memOut64);
+    p->data_mem->write(p->pipe_d_e->WE,aluResult32, p->pipe_d_e->rb,aluResult64);
 
-    processor->pipe_exe_wb->AluResult32[0] = aluResult32[0];
-    processor->pipe_exe_wb->AluResult32[1] = aluResult32[1];
-    processor->pipe_exe_wb->AluResult32[2] = aluResult32[2];
-    processor->pipe_exe_wb->AluResult32[3] = aluResult32[3];
+    p->pipe_exe_wb->AluResult32[0] = aluResult32[0];
+    p->pipe_exe_wb->AluResult32[1] = aluResult32[1];
+    p->pipe_exe_wb->AluResult32[2] = aluResult32[2];
+    p->pipe_exe_wb->AluResult32[3] = aluResult32[3];
 
-     printf(" meme out exe 64  : %c %c %c %c %c %c %c %c \n",memOut64[0],memOut64[1],memOut64[2],memOut64[3],memOut64[4],memOut64[4],memOut64[6],memOut64[7] );
-    processor->pipe_exe_wb->Dout64[0] = memOut64[0];
-    processor->pipe_exe_wb->Dout64[1] = memOut64[1];
-    processor->pipe_exe_wb->Dout64[2] = memOut64[2];
-    processor->pipe_exe_wb->Dout64[3] = memOut64[3];
-    processor->pipe_exe_wb->Dout64[4] = memOut64[4];
-    processor->pipe_exe_wb->Dout64[5] = memOut64[5];
-    processor->pipe_exe_wb->Dout64[6] = memOut64[6];
-    processor->pipe_exe_wb->Dout64[7] = memOut64[7];
+     //printf(" meme out exe 64  : %c %c %c %c %c %c %c %c \n",memOut64[0],memOut64[1],memOut64[2],memOut64[3],memOut64[4],memOut64[4],memOut64[6],memOut64[7] );
 
-    processor->pipe_exe_wb->AluResult64[0] = aluResult64[0];
-    processor->pipe_exe_wb->AluResult64[1] = aluResult64[1];
-    processor->pipe_exe_wb->AluResult64[2] = aluResult64[2];
-    processor->pipe_exe_wb->AluResult64[3] = aluResult64[3];
-    processor->pipe_exe_wb->AluResult64[4] = aluResult64[4];
-    processor->pipe_exe_wb->AluResult64[5] = aluResult64[5];
-    processor->pipe_exe_wb->AluResult64[6] = aluResult64[6];
-    processor->pipe_exe_wb->AluResult64[7] = aluResult64[7];
+    for (int i = 0; i< 8 ; i++)
+        p->pipe_exe_wb->Dout64[i] = memOut64[i];
+
+    for (int i = 0; i< 8 ; i++)
+        p->pipe_exe_wb->AluResult64[i] = aluResult64[i];
 
 
 
-    processor->pipe_exe_wb->Dout32 = memOut32;
-    processor->pipe_exe_wb->rc_dir = processor->pipe_d_e->dir_rc;
-    processor->pipe_exe_wb->sel_dat =processor->pipe_d_e->sel_dat ;
-    processor->pipe_exe_wb->sel_vec =processor->pipe_d_e->sel_vec ;
-    processor->pipe_exe_wb->we_s =processor->pipe_d_e->WE_s ;
-    processor->pipe_exe_wb->we_v =processor->pipe_d_e->WE_v;
+
+    p->pipe_exe_wb->Dout32 = memOut32;
+    p->pipe_exe_wb->rc_dir = p->pipe_d_e->dir_rc;
+    p->pipe_exe_wb->sel_dat =p->pipe_d_e->sel_dat ;
+    p->pipe_exe_wb->sel_vec =p->pipe_d_e->sel_vec ;
+    p->pipe_exe_wb->we_s =p->pipe_d_e->WE_s ;
+    p->pipe_exe_wb->we_v =p->pipe_d_e->WE_v;
 
 
 }
@@ -263,7 +252,7 @@ void* write_back(void*processor_obj)
     processor->reg_bank_s->writeScalar(processor->pipe_exe_wb->rc_dir,sel_dat_out,processor->pipe_exe_wb->we_s);
 
 
-    printf(" ALU paralela wb  : %c %c %c %c %c %c %c %c \n",processor->pipe_exe_wb->Dout64[0],processor->pipe_exe_wb->Dout64[1],processor->pipe_exe_wb->Dout64[2],processor->pipe_exe_wb->Dout64[3],processor->pipe_exe_wb->Dout64[4],processor->pipe_exe_wb->Dout64[5],processor->pipe_exe_wb->Dout64[6],processor->pipe_exe_wb->Dout64[7] );
+   // printf(" ALU paralela wb  : %c %c %c %c %c %c %c %c \n",processor->pipe_exe_wb->Dout64[0],processor->pipe_exe_wb->Dout64[1],processor->pipe_exe_wb->Dout64[2],processor->pipe_exe_wb->Dout64[3],processor->pipe_exe_wb->Dout64[4],processor->pipe_exe_wb->Dout64[5],processor->pipe_exe_wb->Dout64[6],processor->pipe_exe_wb->Dout64[7] );
     //escritura al banco vectorial
     processor->reg_bank_v->writeVector(processor->pipe_exe_wb->rc_dir,sel_vec_out,
                                            processor->pipe_exe_wb->we_v);

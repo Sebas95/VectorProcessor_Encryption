@@ -21,23 +21,23 @@ void ControlUnit::obtainControl(bool* opcode,bool* data,bool* F)
         case 0: //ldv
             ctrl_v = 0; //x
             ctrl_s = 0;
-            sel_opA[0] = false; //x
             sel_opA[1] = false; //x
+            sel_opA[0] = false; //x
             break;
 
         case 1: //strv
             WE[1] = true; //write vector
             ctrl_v = 0;
             ctrl_s = 0;
-            sel_opA[0] = false; //opA = 0
-            sel_opA[1] = true;
+            sel_opA[1] = false; //opA = 0
+            sel_opA[0] = true;
             break;
 
         case 2://lds
             ctrl_v = 0; //x
             ctrl_s = 0; //suma
-            sel_opA[0] = false; //x
-            sel_opA[1] = false;//x
+            sel_opA[1] = false; //x
+            sel_opA[0] = false;//x
             break;
 
         case 3://strs
@@ -112,23 +112,23 @@ void ControlUnit::obtainControl(bool* opcode,bool* data,bool* F)
     {
         WE_v = true;
         WE_s = false;
-        sel_opA[0] = true;
-        sel_opA[1] = false;
+        sel_opA[1] = true;
+        sel_opA[0] = false;
     }
     else if(!data[0] && data[1])  //escalar-vector
     {
         WE_v = true;
         WE_s = false;
-        sel_opA[0] = false;
         sel_opA[1] = false;
+        sel_opA[0] = false;
     }
 
     else if(data[0] && !data[1])  //escalar-vector
     {
         WE_v = false;
         WE_s = true;
-        sel_opA[0] = false;
         sel_opA[1] = false;
+        sel_opA[0] = false;
     }
     else //memory instruction
     {

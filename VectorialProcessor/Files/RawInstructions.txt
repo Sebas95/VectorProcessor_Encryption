@@ -10,6 +10,6 @@ xor(sv)nc    V2, S1, V2
 xor(sv)nc    V3, S1, V3
 strv(m)nc    V0, S2, #00000000
 strv(m)nc    V1, S2, #00001000
-strv(m)nc    V0, S2, #00010000
-strv(m)nc    V1, S2, #00011000
+strv(m)nc    V2, S2, #00010000
+strv(m)nc    V3, S2, #00011000
 add(ss)nc    S2, S2, #00100000 //actualizo el indice i+=64
