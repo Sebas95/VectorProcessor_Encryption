@@ -3,7 +3,7 @@
 
 DataMem::DataMem()
 {
-    init_mem("/home/sebastian95/QtWorkspace/VectorialProcessor/Files/myfile.data");
+    init_mem("/home/sebastian95/QtWorkspace/VectorialProcessor/Files/original.data");
     Parser* parser = new Parser();
     int image_size = size-reservedSpaceForVars;
     parser->ProcessInstructions(image_size);

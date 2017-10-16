@@ -2,7 +2,7 @@
 
 ConditionUnit::ConditionUnit()
 {
-
+    this->Z = false;
 }
 
 void

@@ -5,6 +5,16 @@ ControlUnit::ControlUnit()
      WE = new bool[2]();
      sel_opA = new bool[2]();
 
+     WE_v = false;
+     WE_s = false;
+     ctrl_v = 0;
+     ctrl_s = 0;
+     sel_dat = false;
+     sel_vec = false;
+     instr_enable = false;
+     sel_opb = false;
+
+
 }
 
 void ControlUnit::obtainControl(bool* opcode,bool* data,bool* F)

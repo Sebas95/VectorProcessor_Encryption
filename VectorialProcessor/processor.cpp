@@ -43,34 +43,37 @@ void executeInstructions()
     pthread_t e;
     pthread_t w;
 
+
+
     for(int x = 0; x< num_ciclos*2;x++ )
     {
+
+
         if(clk == false)
         {
             clk = true;
             printf("instrucción %d ",x/2);
-            /*pthread_create(&f,NULL,fetch,(void*)processor);
-            usleep(100);
-            pthread_create(&d,NULL,decode,(void*)processor);
-            usleep(100);
-            pthread_create(&e,NULL,execution,(void*)processor);
-            usleep(100);
-            pthread_create(&w,NULL,write_back,(void*)processor);
-*/
+
             fetch(processor);
-
             decode(processor);
-
             execution(processor);
-
             write_back(processor);
+
+            //    pthread_create(&f,NULL,fetch,(void*)processor);
+
+              //  pthread_create(&d,NULL,decode,(void*)processor);
+
+                //pthread_create(&e,NULL,execution,(void*)processor);
+
+                //pthread_create(&w,NULL,write_back,(void*)processor);
+
         }
         else
         {
             clk = false;
 
         }
-        //usleep(1000);
+        usleep(100);
     }
     processor->data_mem->write_image();
 
@@ -109,61 +112,61 @@ unsigned char* content_Rb = new unsigned char[8](); //8 byte vector
 void* decode(void* processor_obj)
 {
     Int_Bin_converter* converter =  new Int_Bin_converter();
-    Processor* processor =  (Processor*)processor_obj;
+    Processor* p =  (Processor*)processor_obj;
 
-    processor->pipe_f_d->getData(Data);
-    processor->pipe_f_d->getOpcode(opcode);
-    processor->pipe_f_d->getF(F);
-    processor->pipe_f_d->getCond(Cond);
-    processor->pipe_f_d->getra(ra);
-    processor->pipe_f_d->getrb(rb);
-    processor->pipe_f_d->getRa(Ra);
-    processor->pipe_f_d->getRb(Rb);
-    processor->pipe_f_d->getRc(Rc);
-    processor->pipe_f_d->getImm(Imm);
+    p->pipe_f_d->getData(Data);
+    p->pipe_f_d->getOpcode(opcode);
+    p->pipe_f_d->getF(F);
+    p->pipe_f_d->getCond(Cond);
+    p->pipe_f_d->getra(ra);
+    p->pipe_f_d->getrb(rb);
+    p->pipe_f_d->getRa(Ra);
+    p->pipe_f_d->getRb(Rb);
+    p->pipe_f_d->getRc(Rc);
+    p->pipe_f_d->getImm(Imm);
 
-    processor->reg_bank_s->readScalar( converter->convert(ra,2)  , content_ra );
-    processor->reg_bank_s->readScalar( converter->convert(rb,2)  , content_rb );
+    p->reg_bank_s->readScalar( converter->convert(ra,2)  , content_ra );
+    p->reg_bank_s->readScalar( converter->convert(rb,2)  , content_rb );
 
-    processor->reg_bank_v->readVector( converter->convert(Ra,2) , content_Ra);
-    processor->reg_bank_v->readVector( converter->convert(Rb,2) , content_Rb);
+    p->reg_bank_v->readVector( converter->convert(Ra,2) , content_Ra);
+    p->reg_bank_v->readVector( converter->convert(Rb,2) , content_Rb);
 
     //printf("contetn RB en deco : %c %c %c %c %c %c %c %c \n",content_Rb[0],content_Rb[1],content_Rb[2],content_Rb[3],content_Rb[4],content_Rb[5],content_Rb[6],content_Rb[7]);
 
-    processor->control_unit->obtainControl(opcode,Data,F);
+    p->control_unit->obtainControl(opcode,Data,F);
 
-    processor->pipe_d_e->cond   =  Cond;
-    processor->pipe_d_e->ctrl_s =  processor->control_unit->ctrl_s;
-    processor->pipe_d_e->ctrl_v =  processor->control_unit->ctrl_v;
-    processor->pipe_d_e->dir_rc = converter->convert(Rc,2);
+    p->pipe_d_e->cond   =  Cond;
+    p->pipe_d_e->ctrl_s =  p->control_unit->ctrl_s;
+    p->pipe_d_e->ctrl_v =  p->control_unit->ctrl_v;
+    p->pipe_d_e->dir_rc = converter->convert(Rc,2);
     *immExt = converter->convert(Imm,17);
-    processor->pipe_d_e->imm = (unsigned char*)immExt;
-    processor->pipe_d_e->instr_enable   =  processor->control_unit->instr_enable;
+    p->pipe_d_e->imm = (unsigned char*)immExt;
+    p->pipe_d_e->instr_enable   =  p->control_unit->instr_enable;
 
     for(int i = 0; i<8 ;  i++)
-        processor->pipe_d_e->Ra[i]     =  content_Ra[i];
+        p->pipe_d_e->Ra[i]     =  content_Ra[i];
 
     for(int i = 0; i<4 ;  i++)
-        processor->pipe_d_e->ra[i]     =  content_ra[i];
+        p->pipe_d_e->ra[i]     =  content_ra[i];
 
     for(int i = 0; i<8 ;  i++)
-        processor->pipe_d_e->Rb[i]     = content_Rb[i];
+        p->pipe_d_e->Rb[i]     = content_Rb[i];
 
 
-    processor->pipe_d_e->rb[0]     =  content_rb[0];
-    processor->pipe_d_e->rb[1]     =  content_rb[1];
-    processor->pipe_d_e->rb[2]     =  content_rb[2];
-    processor->pipe_d_e->rb[3]     =  content_rb[3];
-    processor->pipe_d_e->sel_dat=  processor->control_unit->sel_dat;
-     processor->pipe_d_e->sel_vec=  processor->control_unit->sel_vec;
-    processor->pipe_d_e->sel_opA=  processor->control_unit->sel_opA;
-    processor->pipe_d_e->sel_opb=  processor->control_unit->sel_opb;
-    processor->pipe_d_e->WE     = processor->control_unit->WE;
-    processor->pipe_d_e->WE_s   = processor->control_unit->WE_s;
-    processor->pipe_d_e->WE_v   = processor->control_unit->WE_v;
+    p->pipe_d_e->rb[0]     =  content_rb[0];
+    p->pipe_d_e->rb[1]     =  content_rb[1];
+    p->pipe_d_e->rb[2]     =  content_rb[2];
+    p->pipe_d_e->rb[3]     =  content_rb[3];
+    p->pipe_d_e->sel_dat=  p->control_unit->sel_dat;
+    p->pipe_d_e->sel_vec=  p->control_unit->sel_vec;
+    p->pipe_d_e->sel_opA=  p->control_unit->sel_opA;
+    p->pipe_d_e->sel_opb=  p->control_unit->sel_opb;
+    p->pipe_d_e->WE     = p->control_unit->WE;
+    p->pipe_d_e->WE_s   = p->control_unit->WE_s;
+    p->pipe_d_e->WE_v   = p->control_unit->WE_v;
 
-     //pthread_exit(NULL); //last thing to do
-   // usleep(1000000);
+
+
 }
 
 bool* Z = new bool[1]();
@@ -244,7 +247,7 @@ void* execution(void* processor_obj)
     p->pipe_exe_wb->we_s =p->pipe_d_e->WE_s ;
     p->pipe_exe_wb->we_v =p->pipe_d_e->WE_v;
 
-    // pthread_exit(NULL); //last thing to do
+
 }
 
 unsigned char* sel_dat_out = new unsigned char[4]();
@@ -253,26 +256,26 @@ unsigned char* sel_vec_out = new unsigned char[8]();
 
 void* write_back(void*processor_obj)
 {
-    Processor* processor =  (Processor*)processor_obj;
+    Processor* p =  (Processor*)processor_obj;
     //while(!clk){}
     //usleep(1000);
     //mux
 
-    sel_dat_out = processor->mux_seldat->multiplex( processor->pipe_exe_wb->sel_dat,
-                                          processor->pipe_exe_wb->AluResult32,processor->pipe_exe_wb->Dout32 );
+    sel_dat_out = p->mux_seldat->multiplex( p->pipe_exe_wb->sel_dat,
+                                          p->pipe_exe_wb->AluResult32,p->pipe_exe_wb->Dout32 );
 
 
 
-    sel_vec_out = processor->mux_sel_vec->multiplex2chan(processor->pipe_exe_wb->sel_vec,
-                                                         processor->pipe_exe_wb->Dout64,processor->pipe_exe_wb->AluResult64);
+    sel_vec_out = p->mux_sel_vec->multiplex2chan(p->pipe_exe_wb->sel_vec,
+                                                         p->pipe_exe_wb->Dout64,p->pipe_exe_wb->AluResult64);
     //escritura al banco escalar
-    processor->reg_bank_s->writeScalar(processor->pipe_exe_wb->rc_dir,sel_dat_out,processor->pipe_exe_wb->we_s);
+    p->reg_bank_s->writeScalar(p->pipe_exe_wb->rc_dir,sel_dat_out,p->pipe_exe_wb->we_s);
 
 
    // printf(" ALU paralela wb  : %c %c %c %c %c %c %c %c \n",processor->pipe_exe_wb->Dout64[0],processor->pipe_exe_wb->Dout64[1],processor->pipe_exe_wb->Dout64[2],processor->pipe_exe_wb->Dout64[3],processor->pipe_exe_wb->Dout64[4],processor->pipe_exe_wb->Dout64[5],processor->pipe_exe_wb->Dout64[6],processor->pipe_exe_wb->Dout64[7] );
     //escritura al banco vectorial
-    processor->reg_bank_v->writeVector(processor->pipe_exe_wb->rc_dir,sel_vec_out,
-                                           processor->pipe_exe_wb->we_v);
+    p->reg_bank_v->writeVector(p->pipe_exe_wb->rc_dir,sel_vec_out,
+                                           p->pipe_exe_wb->we_v);
 
-     //pthread_exit(NULL); //last thing to do
+
 }
