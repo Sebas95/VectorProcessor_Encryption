@@ -29,9 +29,9 @@ Processor::Processor()
     start = false;
 
 }
-//int num_ciclos = 26625;
+int num_ciclos = 26625;
 
-int num_ciclos = 28673;
+//int num_ciclos = 28673;
 bool clk = false;
 
 
