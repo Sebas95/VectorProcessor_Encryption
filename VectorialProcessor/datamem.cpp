@@ -5,7 +5,8 @@ DataMem::DataMem()
 {
     init_mem("/home/sebastian95/QtWorkspace/VectorialProcessor/Files/original.data");
     Parser* parser = new Parser();
-    parser->ProcessInstructions(size);
+    int image_size = size-reservedSpaceForVars;
+    parser->ProcessInstructions(image_size);
 }
 
 void DataMem:: getVector(int dir, unsigned char* vector)
@@ -41,6 +42,7 @@ void DataMem:: write(bool* WE, unsigned char* direction, unsigned char* Din32, u
        mem[dir+1] = Din32[1];
        mem[dir+2] = Din32[2];
        mem[dir+3] = Din32[3];
+       printf("char : .%c::::::::::::::::::",mem[dir+0]);
    }
    if(WE[1])
    {
@@ -68,7 +70,8 @@ void DataMem:: write(bool* WE, unsigned char* direction, unsigned char* Din32, u
 void DataMem::init_mem(const char *filename)
 {
 
-    int string_size, read_size;
+
+    int  read_size;
     FILE *handler = fopen(filename, "r");
     if (handler)
     {
@@ -76,15 +79,15 @@ void DataMem::init_mem(const char *filename)
         fseek(handler, 0, SEEK_END);
         // Offset from the first to the last byte, or in other words, filesize
         string_size = ftell(handler);
-        size = string_size;
+        size = string_size + reservedSpaceForVars;
         // go back to the start of the file
         rewind(handler);
 
         // Allocate a string that can hold it all
-        mem = (unsigned char*) malloc(sizeof(unsigned char) * (string_size + 1) );
+        mem = (unsigned char*) malloc(sizeof(unsigned char) * (size+ 1) );
 
         // Read it all in one operation
-        read_size = fread(mem, sizeof(unsigned char), string_size, handler);
+        read_size = fread((mem+reservedSpaceForVars), sizeof(unsigned char), string_size, handler);
 
         // fread doesn't set it so put a \0 in the last position
         // and buffer is now officially a string
@@ -114,6 +117,6 @@ void DataMem::write_image(){
     FILE * pFile;
 
     pFile = fopen ("/home/sebastian95/QtWorkspace/VectorialProcessor/Files/myfile.data", "wb");
-    fwrite (mem , sizeof(char), size, pFile);
+    fwrite ((mem+reservedSpaceForVars) , sizeof(char), string_size, pFile);
     fclose (pFile);
 }

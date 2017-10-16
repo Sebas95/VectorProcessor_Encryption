@@ -9,7 +9,7 @@ al color (grises) de cada pixel (i,j) deberá aplicársele una operación XOR co
 de 8 bits, denominado clave privada. Para desencriptar una imagen encriptada con este
 algoritmo, debe aplicarse el mismo proceso.
 */
-
+add(ss)nc    S2, S2, #00010000 //posicion donde inicia la imagen
 add(ss)nc    S1, S0, #11111111  //Cargo la clave xor en S1
 -repeat -u4
 ldv(m)nc     V0, S2, #00000000
@@ -37,7 +37,7 @@ Para desencriptar, se deberá aplicar un desplazamiento simple en la dirección 
 con la misma cantidad de bits. Este algoritmo generará pérdidas en la información, a la
 hora de desencriptar.
 */
-
+add(ss)nc    S2, S2, #00010000 //posicion donde inicia la imagen
 add(ss)nc    S1, S0, #00000001  //Cargo num de desplazamientos
 -repeat -u4
 ldv(m)nc     V0, S2, #00000000
@@ -55,6 +55,7 @@ strv(m)nc    V3, S2, #00011000
 add(ss)nc    S2, S2, #00100000 //actualizo el indice i+=64
 
 
+add(ss)nc    S2, S2, #00010000 //posicion donde inicia la imagen
 add(ss)nc    S1, S0, #00000001  //Cargo num de desplazamientos
 -repeat -u4
 ldv(m)nc     V0, S2, #00000000
@@ -96,7 +97,7 @@ desencriptar, deberá restarse cada vector de pixeles en la imagen con respecto 
 vector clave, definido previamente.
 */
 
-
+add(ss)nc    S2, S2, #00010000 //posicion donde inicia la imagen
 ldv(m)nc     V0, S3, #00000001  //cargo un vector que será el clave
 -repeat -u2
 ldv(m)nc     V2, S2, #00000000
@@ -108,7 +109,7 @@ strv(m)nc    V3, S2, #00001000
 add(ss)nc    S2, S2, #00010000 //actualizo el indice i+=24
 
 
-
+add(ss)nc    S2, S2, #00010000 //posicion donde inicia la imagen
 ldv(m)nc     V0, S3, #00000001  //cargo un vector que será el clave
 -repeat -u2
 ldv(m)nc     V2, S2, #00000000

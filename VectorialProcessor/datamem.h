@@ -15,6 +15,8 @@ private:
     unsigned char *mem = NULL;
     int size=0;
     void init_mem(const char *filename);
+    int reservedSpaceForVars = 16;
+    int string_size=0;
 public:
     DataMem();
     void getVector(int dir, unsigned char* vector);

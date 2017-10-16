@@ -4,14 +4,6 @@
 RegisterBankVector::RegisterBankVector()
 {
     v1 = new unsigned char[8]();
-    v1[0] = 'u';
-    v1[1] = 'u';
-    v1[2] = 'u';
-    v1[3] = 'u';
-    v1[4] = 'u';
-    v1[5] = 'u';
-    v1[6] = 'u';
-    v1[7] = 'u';
     v2 = new unsigned char[8]();
     v3 = new unsigned char[8]();
     v4 = new unsigned char[8]();
