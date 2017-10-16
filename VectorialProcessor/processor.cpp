@@ -31,7 +31,7 @@ Processor::Processor()
 }
 //int num_ciclos = 26625;
 
-int num_ciclos = 26625;
+int num_ciclos = 28673;
 bool clk = false;
 
 
@@ -223,7 +223,7 @@ void* execution(void* processor_obj)
     p->pipe_exe_wb->AluResult32[2] = aluResult32[2];
     p->pipe_exe_wb->AluResult32[3] = aluResult32[3];
 
-    printf("ALU result exe 32 %d \n ", *(int*)p->pipe_exe_wb->AluResult32);
+  //printf("ALU result exe 32 %d \n ", *(int*)p->pipe_exe_wb->AluResult32);
 
      //printf(" meme out exe 64  : %c %c %c %c %c %c %c %c \n",memOut64[0],memOut64[1],memOut64[2],memOut64[3],memOut64[4],memOut64[4],memOut64[6],memOut64[7] );
 

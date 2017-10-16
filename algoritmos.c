@@ -10,6 +10,21 @@ de 8 bits, denominado clave privada. Para desencriptar una imagen encriptada con
 algoritmo, debe aplicarse el mismo proceso.
 */
 
+add(ss)nc    S1, S0, #11111111  //Cargo la clave xor en S1
+-repeat -u4
+ldv(m)nc     V0, S2, #00000000
+ldv(m)nc     V1, S2, #00001000
+ldv(m)nc     V2, S2, #00010000
+ldv(m)nc     V3, S2, #00011000
+xor(sv)nc    V0, S1, V0
+xor(sv)nc    V1, S1, V1
+xor(sv)nc    V2, S1, V2
+xor(sv)nc    V3, S1, V3
+strv(m)nc    V0, S2, #00000000
+strv(m)nc    V1, S2, #00001000
+strv(m)nc    V2, S2, #00010000
+strv(m)nc    V3, S2, #00011000
+add(ss)nc    S2, S2, #00100000 //actualizo el indice i+=64
 
 
 
@@ -22,6 +37,39 @@ Para desencriptar, se deberá aplicar un desplazamiento simple en la dirección 
 con la misma cantidad de bits. Este algoritmo generará pérdidas en la información, a la
 hora de desencriptar.
 */
+
+add(ss)nc    S1, S0, #00000001  //Cargo num de desplazamientos
+-repeat -u4
+ldv(m)nc     V0, S2, #00000000
+ldv(m)nc     V1, S2, #00001000
+ldv(m)nc     V2, S2, #00010000
+ldv(m)nc     V3, S2, #00011000
+shr(sv)nc    V0, S1, V0
+shr(sv)nc    V1, S1, V1
+shr(sv)nc    V2, S1, V2
+shr(sv)nc    V3, S1, V3
+strv(m)nc    V0, S2, #00000000
+strv(m)nc    V1, S2, #00001000
+strv(m)nc    V2, S2, #00010000
+strv(m)nc    V3, S2, #00011000
+add(ss)nc    S2, S2, #00100000 //actualizo el indice i+=64
+
+
+add(ss)nc    S1, S0, #00000001  //Cargo num de desplazamientos
+-repeat -u4
+ldv(m)nc     V0, S2, #00000000
+ldv(m)nc     V1, S2, #00001000
+ldv(m)nc     V2, S2, #00010000
+ldv(m)nc     V3, S2, #00011000
+shl(sv)nc    V0, S1, V0
+shl(sv)nc    V1, S1, V1
+shl(sv)nc    V2, S1, V2
+shl(sv)nc    V3, S1, V3
+strv(m)nc    V0, S2, #00000000
+strv(m)nc    V1, S2, #00001000
+strv(m)nc    V2, S2, #00010000
+strv(m)nc    V3, S2, #00011000
+add(ss)nc    S2, S2, #00100000 //actualizo el indice i+=64
 
 
 
@@ -49,3 +97,24 @@ vector clave, definido previamente.
 */
 
 
+ldv(m)nc     V0, S3, #00000001  //cargo un vector que será el clave
+-repeat -u2
+ldv(m)nc     V2, S2, #00000000
+ldv(m)nc     V3, S2, #00001000
+add(vv)nc    V2, V0, V2
+add(vv)nc    V3, V0, V3
+strv(m)nc    V2, S2, #00000000
+strv(m)nc    V3, S2, #00001000
+add(ss)nc    S2, S2, #00010000 //actualizo el indice i+=24
+
+
+
+ldv(m)nc     V0, S3, #00000001  //cargo un vector que será el clave
+-repeat -u2
+ldv(m)nc     V2, S2, #00000000
+ldv(m)nc     V3, S2, #00001000
+sub(vv)nc    V2, V0, V2
+sub(vv)nc    V3, V0, V3
+strv(m)nc    V2, S2, #00000000
+strv(m)nc    V3, S2, #00001000
+add(ss)nc    S2, S2, #00010000 //actualizo el indice i+=24

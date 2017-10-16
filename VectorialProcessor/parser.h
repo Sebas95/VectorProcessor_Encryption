@@ -20,6 +20,7 @@ private:
     void AddCond(char* cond,char* instruction);
     void AddOperand(char* operand,char* instruction);
     void fillImm(char* imm);
+    int getIntFromChar(char);
 public:
 
 

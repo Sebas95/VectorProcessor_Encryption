@@ -5,6 +5,18 @@ Parser::Parser()
 
 }
 
+int Parser::getIntFromChar(char c)
+{
+    if (c == '1')
+        return 1;
+    if (c == '2')
+        return 2;
+    if (c == '3')
+        return 3;
+    if (c == '4')
+        return 4;
+
+}
 
 void
 Parser::ProcessInstructions(int image_size){
@@ -19,11 +31,11 @@ Parser::ProcessInstructions(int image_size){
 
     FILE * pFile;
     bool entro_repeat = false;
-    int replicated_instr=13;
-    char* instructions_replicated_buffer = new char[replicated_instr*32]();
+    int replicated_instr=0;
+    char* instructions_replicated_buffer = new char[100*32]();
     int index_replicated = 0;
     pFile = fopen ("/home/sebastian95/QtWorkspace/VectorialProcessor/Files/Instructions.txt", "wb");
-
+    int unrolling=0;
     while (feof(archivo) == 0)
     {
         fgets(caracteres,100,archivo);
@@ -37,6 +49,7 @@ Parser::ProcessInstructions(int image_size){
         char* temp = new char[2]();
         char* imm = new char[17]();
         fillImm(imm);
+
         while (token != NULL)
           {
             if(token[0] == '/')
@@ -49,6 +62,11 @@ Parser::ProcessInstructions(int image_size){
                 macro = true;
                 entro_repeat = true;
             }
+            //-u
+           if((token[0] == '-' ) && (token[1] == 'u'))
+
+                unrolling = getIntFromChar(token[2]);
+
 
             if(isImm(token)) inmediato = true;
             if(!comment && !macro)
@@ -123,18 +141,20 @@ Parser::ProcessInstructions(int image_size){
                     instructions_replicated_buffer[index_replicated+i] = instruction[i];
                   }
                   index_replicated = index_replicated +32;
+                  replicated_instr++;
               }
           }
 
 
     }
 
-    for(int y = 0 ; y< image_size/32 -1 ; y++)
+    for(int y = 0 ; y< image_size/(2*unrolling) -1 ; y++)
     {
         fwrite (instructions_replicated_buffer , sizeof(char), replicated_instr*32, pFile);
         //printf (" La instrucción es: %s\n\n",instructions_replicated_buffer);
 
     }
+    free(instructions_replicated_buffer);
 
 
     fclose (pFile);
