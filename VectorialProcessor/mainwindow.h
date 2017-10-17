@@ -20,6 +20,7 @@ public:
     void refreshFetch();
     void refreshDeco();
     void refreshExe();
+    void refreshWriteBack();
 
     void setProcessor(Processor* processor);
 private slots:
