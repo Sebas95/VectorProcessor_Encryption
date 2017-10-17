@@ -42,7 +42,7 @@ void DataMem:: write(bool* WE, unsigned char* direction, unsigned char* Din32, u
        mem[dir+1] = Din32[1];
        mem[dir+2] = Din32[2];
        mem[dir+3] = Din32[3];
-       printf("char : .%c::::::::::::::::::",mem[dir+0]);
+      // printf("char : .%c::::::::::::::::::",mem[dir+0]);
    }
    if(WE[1])
    {
@@ -55,15 +55,7 @@ void DataMem:: write(bool* WE, unsigned char* direction, unsigned char* Din32, u
        mem[dir+6] = Din64[6];
        mem[dir+7] = Din64[7];
 
-       printf("write in dir  %d ",dir);
-       printf(" %c ",mem[dir+0]);
-       printf(" %c ",mem[dir+1]);
-       printf(" %c ",mem[dir+2]);
-       printf(" %c ",mem[dir+3]);
-       printf(" %c ",mem[dir+4]);
-       printf(" %c ",mem[dir+5]);
-       printf(" %c ",mem[dir+6]);
-       printf(" %c\n",mem[dir+7]);
+
    }
 
 }

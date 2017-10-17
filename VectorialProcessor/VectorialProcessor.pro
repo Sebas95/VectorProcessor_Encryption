@@ -50,6 +50,7 @@ HEADERS  += mainwindow.h \
     processor.h \
     int_bin_converter.h \
     conditionunit.h \
-    parser.h
+    parser.h \
+    signals.h
 
 FORMS    += mainwindow.ui

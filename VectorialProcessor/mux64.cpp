@@ -20,12 +20,12 @@ unsigned char* Mux64::multiplex(bool select[],unsigned char* chan0, unsigned cha
     }
     else if( select[0] && !select[1] )
     {
-        printf("____________________________________");
+
         return chan2;
     }
     else
     {
-        printf("%s\n", "Error en mux 64" );
+
         return chan2;
     }
 

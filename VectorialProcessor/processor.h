@@ -18,6 +18,8 @@
 #include <pthread.h>
 #include <unistd.h>
 
+
+
 class Processor
 {
 private:
@@ -51,11 +53,12 @@ public:
 
 };
 
-void executeInstructions();
+void *executeInstructions(void *unused);
 void* fetch(void*);
 void* decode(void*);
 void* execution(void*);
 void* write_back(void*);
+
 
 
 #endif // PROCESSOR_H

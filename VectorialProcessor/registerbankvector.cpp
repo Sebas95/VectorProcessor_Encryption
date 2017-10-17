@@ -74,7 +74,7 @@ void RegisterBankVector::writeVector(int dir_rc,unsigned char* v,bool we_v)
             v1[5] = v[5];
             v1[6] = v[6];
             v1[7] = v[7];
-          //  printf(" vector escritura en v0 %c %c %c %c %c %c %c %c \n",v[0],v1[1],v1[2],v1[3],v1[4],v1[5],v1[6],v1[7]);
+            printf(" vector escritura en v0 %c %c %c %c %c %c %c %c \n",v[0],v1[1],v1[2],v1[3],v1[4],v1[5],v1[6],v1[7]);
         }
         else if(dir_rc==1)
         {
