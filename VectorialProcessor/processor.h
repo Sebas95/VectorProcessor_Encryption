@@ -93,7 +93,8 @@ public:
 
 
 
-
+int getSteps();
+void setSteps(int s);
 void *executeInstructions(void *procesador);
 void* fetch(void*);
 void* decode(void*);

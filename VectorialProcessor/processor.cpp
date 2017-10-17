@@ -39,6 +39,18 @@ int num_ciclos = 26625;
 //int num_ciclos = 28673;
 bool clk = false;
 
+int steps = 0;
+
+int getSteps()
+{
+    return steps;
+}
+
+void setSteps(int s)
+{
+    steps = s;
+}
+
 
 void* executeInstructions(void* procesador)
 {

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1180</width>
-    <height>645</height>
+    <height>673</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -93,7 +93,7 @@
      <rect>
       <x>590</x>
       <y>360</y>
-      <width>91</width>
+      <width>81</width>
       <height>121</height>
      </rect>
     </property>
@@ -168,7 +168,7 @@
      </font>
     </property>
     <property name="text">
-     <string/>
+     <string>VA</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_16">
@@ -177,14 +177,14 @@
       <x>500</x>
       <y>370</y>
       <width>41</width>
-      <height>81</height>
+      <height>61</height>
      </rect>
     </property>
     <property name="text">
      <string>Mux</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_17">
+   <widget class="QPushButton" name="boton_salida_muxA">
     <property name="geometry">
      <rect>
       <x>540</x>
@@ -199,7 +199,7 @@
      </font>
     </property>
     <property name="text">
-     <string/>
+     <string>muxV</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_18">
@@ -217,7 +217,7 @@
      </font>
     </property>
     <property name="text">
-     <string/>
+     <string>AluResult V</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_19">
@@ -233,7 +233,7 @@
      <string>Mux</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_20">
+   <widget class="QPushButton" name="boton_salida_muxb">
     <property name="geometry">
      <rect>
       <x>540</x>
@@ -251,7 +251,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_21">
+   <widget class="QPushButton" name="boton_ra_exe">
     <property name="geometry">
      <rect>
       <x>430</x>
@@ -269,7 +269,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_22">
+   <widget class="QPushButton" name="boton_resAlu32">
     <property name="geometry">
      <rect>
       <x>680</x>
@@ -290,10 +290,10 @@
    <widget class="QPushButton" name="pushButton_23">
     <property name="geometry">
      <rect>
-      <x>680</x>
+      <x>670</x>
       <y>410</y>
-      <width>61</width>
-      <height>16</height>
+      <width>71</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="font">
@@ -302,7 +302,7 @@
      </font>
     </property>
     <property name="text">
-     <string/>
+     <string>AluResult V</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_11">
@@ -364,7 +364,7 @@
      </font>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>Dout64'b</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_26">
@@ -429,7 +429,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_29">
+   <widget class="QPushButton" name="boton_dout32">
     <property name="geometry">
      <rect>
       <x>860</x>
@@ -444,7 +444,7 @@
      </font>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_30">
@@ -583,7 +583,7 @@
      </font>
     </property>
     <property name="text">
-     <string/>
+     <string>VA</string>
     </property>
    </widget>
    <widget class="QPushButton" name="boton_DinC1">
@@ -712,7 +712,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_45">
+   <widget class="QPushButton" name="boton_rb_exe_">
     <property name="geometry">
      <rect>
       <x>430</x>
@@ -770,7 +770,7 @@
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>320</y>
+      <y>330</y>
       <width>211</width>
       <height>16</height>
      </rect>
@@ -812,10 +812,10 @@
      </font>
     </property>
     <property name="text">
-     <string/>
+     <string>RepS</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_51">
+   <widget class="QPushButton" name="imm_exe">
     <property name="geometry">
      <rect>
       <x>430</x>
@@ -864,7 +864,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_54">
+   <widget class="QPushButton" name="boton_dirc_fetch">
     <property name="geometry">
      <rect>
       <x>200</x>
@@ -882,7 +882,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_55">
+   <widget class="QPushButton" name="dir_c_exe">
     <property name="geometry">
      <rect>
       <x>430</x>
@@ -1368,7 +1368,7 @@
      </font>
     </property>
     <property name="text">
-     <string/>
+     <string>VB</string>
     </property>
    </widget>
    <widget class="QPushButton" name="ejecutar_all">
@@ -1388,13 +1388,238 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>60</y>
+      <y>70</y>
       <width>111</width>
       <height>22</height>
      </rect>
     </property>
     <property name="text">
      <string>Paso</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_pasos">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>110</y>
+      <width>59</width>
+      <height>14</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Ciclos: 0</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_VA">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>560</y>
+      <width>251</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>VA: </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_VB">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>580</y>
+      <width>251</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>VB:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_32">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>440</y>
+      <width>161</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>6</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>VB</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_VA_exe">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>550</y>
+      <width>251</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>VA: </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_VB_exe">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>570</y>
+      <width>251</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>VB: </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_Rps">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>550</y>
+      <width>261</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>RpS: </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_muxV">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>570</y>
+      <width>271</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>muxV: </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_resV">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>590</y>
+      <width>291</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>AluResult V: </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_pasos_3">
+    <property name="geometry">
+     <rect>
+      <x>750</x>
+      <y>360</y>
+      <width>101</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>6</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Data input 32'b</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_pasos_4">
+    <property name="geometry">
+     <rect>
+      <x>750</x>
+      <y>250</y>
+      <width>21</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>6</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Dir</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_pasos_5">
+    <property name="geometry">
+     <rect>
+      <x>750</x>
+      <y>410</y>
+      <width>101</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>6</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Data input 64'b</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_pasos_6">
+    <property name="geometry">
+     <rect>
+      <x>810</x>
+      <y>240</y>
+      <width>51</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>6</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Dout 32'b</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_pasos_8">
+    <property name="geometry">
+     <rect>
+      <x>790</x>
+      <y>200</y>
+      <width>51</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>6</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>WE 2'b</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_dout64">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>590</y>
+      <width>271</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Dout64: </string>
     </property>
    </widget>
    <zorder>pushButton_53</zorder>
@@ -1412,12 +1637,12 @@
    <zorder>pushButton_14</zorder>
    <zorder>pushButton_2</zorder>
    <zorder>pushButton_16</zorder>
-   <zorder>pushButton_17</zorder>
+   <zorder>boton_salida_muxA</zorder>
    <zorder>pushButton_18</zorder>
    <zorder>pushButton_19</zorder>
-   <zorder>pushButton_20</zorder>
-   <zorder>pushButton_21</zorder>
-   <zorder>pushButton_22</zorder>
+   <zorder>boton_salida_muxb</zorder>
+   <zorder>boton_ra_exe</zorder>
+   <zorder>boton_resAlu32</zorder>
    <zorder>pushButton_23</zorder>
    <zorder>pushButton_11</zorder>
    <zorder>pushButton_24</zorder>
@@ -1425,7 +1650,7 @@
    <zorder>pushButton_26</zorder>
    <zorder>pushButton_27</zorder>
    <zorder>pushButton_10</zorder>
-   <zorder>pushButton_29</zorder>
+   <zorder>boton_dout32</zorder>
    <zorder>pushButton_30</zorder>
    <zorder>pushButton_31</zorder>
    <zorder>pc_boton</zorder>
@@ -1441,15 +1666,15 @@
    <zorder>boton_RA</zorder>
    <zorder>boton_content_ra</zorder>
    <zorder>boton_content_rb</zorder>
-   <zorder>pushButton_45</zorder>
+   <zorder>boton_rb_exe_</zorder>
    <zorder>pushButton_46</zorder>
    <zorder>pushButton_47</zorder>
    <zorder>imm_deco</zorder>
    <zorder>pushButton_50</zorder>
-   <zorder>pushButton_51</zorder>
+   <zorder>imm_exe</zorder>
    <zorder>pushButton_52</zorder>
-   <zorder>pushButton_54</zorder>
-   <zorder>pushButton_55</zorder>
+   <zorder>boton_dirc_fetch</zorder>
+   <zorder>dir_c_exe</zorder>
    <zorder>pushButton_56</zorder>
    <zorder>pushButton_61</zorder>
    <zorder>pushButton_59</zorder>
@@ -1480,6 +1705,21 @@
    <zorder>boton_Content_RB</zorder>
    <zorder>ejecutar_all</zorder>
    <zorder>boton_paso</zorder>
+   <zorder>label_pasos</zorder>
+   <zorder>label_VA</zorder>
+   <zorder>label_VB</zorder>
+   <zorder>pushButton_32</zorder>
+   <zorder>label_VA_exe</zorder>
+   <zorder>label_VB_exe</zorder>
+   <zorder>label_Rps</zorder>
+   <zorder>label_muxV</zorder>
+   <zorder>label_resV</zorder>
+   <zorder>label_pasos_3</zorder>
+   <zorder>label_pasos_4</zorder>
+   <zorder>label_pasos_5</zorder>
+   <zorder>label_pasos_6</zorder>
+   <zorder>label_pasos_8</zorder>
+   <zorder>label_dout64</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

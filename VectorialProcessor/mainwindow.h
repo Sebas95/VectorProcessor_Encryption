@@ -3,8 +3,11 @@
 #include <QMainWindow>
 #include "processor.h"
 
+
+
 namespace Ui {
 class MainWindow;
+
 }
 
 class MainWindow : public QMainWindow
@@ -14,8 +17,9 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    void refreshFetch(int pc);
-    void refreshDeco(int ra, int rb , int dir_C, int content_ra, int content_rb, int con_RA, int conRB);
+    void refreshFetch();
+    void refreshDeco();
+    void refreshExe();
 
     void setProcessor(Processor* processor);
 private slots:
