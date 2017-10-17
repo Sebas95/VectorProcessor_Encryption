@@ -26,6 +26,7 @@ void MainWindow::refreshFetch(int pc)
 void  MainWindow::refreshDeco(int ra, int rb , int dir_C, int content_ra, int content_rb, int con_RA, int conRB)
 {
 
+
     ui->boton_ra->setText(QString::number(ra));
     ui->boton_rb->setText(QString::number(rb));
     ui->boton_RA->setText(QString::number(ra));
@@ -47,6 +48,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::setProcessor(Processor* processor)
+{
+    this->processor =processor;
+}
 
 void MainWindow::on_boton_paso_clicked()
 {
@@ -56,6 +61,5 @@ void MainWindow::on_boton_paso_clicked()
 void MainWindow::on_ejecutar_all_clicked()
 {
     pthread_t p;
-    int* g;
-    pthread_create(&p,NULL,executeInstructions,(void*)g);
+    pthread_create(&p,NULL,executeInstructions,(void*)processor);
 }

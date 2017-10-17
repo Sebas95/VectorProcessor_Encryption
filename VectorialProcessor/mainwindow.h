@@ -17,6 +17,7 @@ public:
     void refreshFetch(int pc);
     void refreshDeco(int ra, int rb , int dir_C, int content_ra, int content_rb, int con_RA, int conRB);
 
+    void setProcessor(Processor* processor);
 private slots:
 
 
@@ -26,6 +27,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    Processor* processor;
 };
 
 #endif // MAINWINDOW_H
