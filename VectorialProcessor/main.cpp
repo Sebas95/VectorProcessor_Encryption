@@ -10,12 +10,13 @@ int main(int argc, char *argv[])
 {
 
     QApplication a(argc, argv);
+
     MainWindow w;
 
-
     Processor* processor =  new Processor();
+
     w.setProcessor(processor);
-     w.show();
+    w.show();
 
     return a.exec();
 

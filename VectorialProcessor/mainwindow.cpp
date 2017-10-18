@@ -66,7 +66,7 @@ void  MainWindow::refreshExe()
     ui->imm_exe->setText("imm: "+QString::number(*(int*)processor->pipe_d_e->imm));
     ui->boton_salida_muxb->setText(QString::number(*(int*)processor->muxbResult));
     ui->pushButton_52->setText(QString::number(*(int*)processor->pipe_d_e->rb));
-    ui->boton_resAlu32->setText(QString::number(*(int*)processor->aluResult32));
+
     ui->boton_dout32->setText(QString::number(*(unsigned int*)processor->memOut32));
     ui->boton_WE->setText(QString::number(processor->converter->convert(processor->pipe_d_e->WE,2)));
     ui->pushButton_28->setText(QString::number(*(int*)processor->aluResult32));
@@ -109,7 +109,7 @@ void  MainWindow::refreshExe()
     ui->label_resV->setText("AluResV: " +string5);
     ui->label_dout64->setText("Dout64: "+string6);
     ui->boton_cond_exe->setText("Cond: "+QString::number(processor->converter->convert(processor->pipe_d_e->cond,2)));
-
+    ui->boton_resAlu32->setText(QString::number(*(int*)processor->aluResult32));
 }
 
 void MainWindow::refreshWriteBack()
@@ -138,19 +138,32 @@ void MainWindow::setProcessor(Processor* processor)
     this->processor =processor;
 }
 
+bool clk2 =false;
 void MainWindow::on_boton_paso_clicked()
 {
-    fetch(processor);
-    decode(processor);
-    execution(processor);
-    write_back(processor);
 
-    ui->label_pasos->setText("Ciclos :" + QString::number(getSteps()));
-    setSteps(getSteps()+1);
-    refreshFetch();
-    refreshDeco();
-    refreshExe();
-    refreshWriteBack();
+
+    if(clk2== false)
+    {
+        clk2=true;
+        execution(processor);
+        refreshExe();
+        decode(processor);
+        refreshDeco();
+        fetch(processor);
+        refreshFetch();
+        ui->label_pasos->setText("Ciclos :" + QString::number(getSteps()));
+        setSteps(getSteps()+1);
+    }
+    else
+    {
+        clk2=false;
+        write_back(processor);
+        refreshWriteBack();
+    }
+    processor->data_mem->write_image();
+
+
 }
 
 void MainWindow::on_ejecutar_all_clicked()

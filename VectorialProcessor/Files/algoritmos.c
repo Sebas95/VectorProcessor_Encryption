@@ -214,7 +214,7 @@ add(ss)nc    S0, S0, #00000000 //nop
 
 
 
-//////////////// PROGRAMA DE PRUEBA /////////////////////////////////
+//////////////// PROGRAMA DE PRUEBA DE INSTRUCCIONES/////////////////////////////////
 
 
 add(ss)nc    S1, S0, #00000011 // cargo 3

@@ -34,9 +34,10 @@ Processor::Processor()
 
 
 
-int num_ciclos = 26625;
-//int num_ciclos = 2;
-//int num_ciclos = 28673;
+int num_ciclos = 28674;
+
+//int num_ciclos = 32789;
+
 bool clk = false;
 
 int steps = 0;
@@ -54,7 +55,6 @@ void setSteps(int s)
 
 void* executeInstructions(void* procesador)
 {
-
     Processor* processor = (Processor*)procesador;
 
     for(int x = 0; x< num_ciclos*2;x++ )
@@ -63,20 +63,18 @@ void* executeInstructions(void* procesador)
         {
             clk = true;
             printf("ciclo %d \n",x/2);
-            fetch(processor);
-            decode(processor);
+
+            //write_back(processor);
             execution(processor);
-            write_back(processor);
+            decode(processor);
+            fetch(processor);
         }
         else
         {
             clk = false;
-
-
+            write_back(processor);
         }
-
         usleep(10);
-
     }
 
     processor->data_mem->write_image();
